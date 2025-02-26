@@ -25,19 +25,24 @@ $quartos = [];
 if ($usuarioTipo === 'cliente') {
     // Carregar reservas do cliente
     try {
-        $stmt = $pdo->prepare("SELECT r.Id, r.DataCheckIn, r.DataCheckOut, q.Nome AS Quarto
+        $stmt = $pdo->prepare("SELECT r.Id, r.DataCheckIn, r.DataCheckOut, q.numero AS Quarto, u.Nome AS Cliente
                                FROM Reservas r
-                               JOIN Quartos q ON r.QuartoId = q.Id
-                               WHERE r.ClienteId = ?");
+                               JOIN Quartos q ON r.quarto_id = q.id
+                               JOIN Usuarios u ON r.usuario_id = u.id
+                               WHERE r.usuario_id = ?");
         $stmt->execute([$usuarioId]);
         $reservas = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         echo "Erro ao carregar reservas: " . $e->getMessage();
     }
 } elseif ($usuarioTipo === 'hotel') {
-    // Carregar todos os quartos do hotel
+    // Carregar todos os quartos com informações de reservas e nome do cliente
     try {
-        $stmt = $pdo->query("SELECT * FROM quartos");
+        $stmt = $pdo->prepare("SELECT q.id AS QuartoId, q.numero, q.tipo, q.preco, q.status, u.Nome AS ClienteNome
+                               FROM Quartos q
+                               LEFT JOIN Reservas r ON q.id = r.quarto_id
+                               LEFT JOIN Usuarios u ON r.usuario_id = u.id");
+        $stmt->execute();
         $quartos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         die("Erro ao buscar quartos: " . $e->getMessage());
@@ -85,6 +90,7 @@ if ($usuarioTipo === 'cliente') {
             <thead>
               <tr>
                 <th>Quarto</th>
+                <th>Nome do Cliente</th>
                 <th>Check-in</th>
                 <th>Check-out</th>
               </tr>
@@ -93,6 +99,7 @@ if ($usuarioTipo === 'cliente') {
               <?php foreach ($reservas as $reserva): ?>
                 <tr>
                   <td><?php echo htmlspecialchars($reserva['Quarto']); ?></td>
+                  <td><?php echo htmlspecialchars($reserva['Cliente']); ?></td>
                   <td><?php echo date('d/m/Y', strtotime($reserva['DataCheckIn'])); ?></td>
                   <td><?php echo date('d/m/Y', strtotime($reserva['DataCheckOut'])); ?></td>
                 </tr>
@@ -109,10 +116,11 @@ if ($usuarioTipo === 'cliente') {
         <table class="table table-bordered table-hover">
           <thead class="table-dark">
             <tr>
-              <th>Número</th>
+              <th>Quarto</th>
               <th>Tipo</th>
               <th>Preço</th>
               <th>Status</th>
+              <th>Cliente</th>
               <th>Ações</th>
             </tr>
           </thead>
@@ -123,9 +131,10 @@ if ($usuarioTipo === 'cliente') {
                 <td><?php echo htmlspecialchars($quarto['tipo']); ?></td>
                 <td>R$ <?php echo number_format($quarto['preco'], 2, ',', '.'); ?></td>
                 <td><?php echo htmlspecialchars($quarto['status']); ?></td>
+                <td><?php echo $quarto['ClienteNome'] ? htmlspecialchars($quarto['ClienteNome']) : 'Nenhum'; ?></td>
                 <td>
-                  <a href="editar_quarto.php?id=<?php echo $quarto['id']; ?>" class="btn btn-warning btn-sm">Editar</a>
-                  <a href="excluir_quarto.php?id=<?php echo $quarto['id']; ?>" class="btn btn-danger btn-sm">Excluir</a>
+                  <a href="editar_quarto.php?id=<?php echo $quarto['QuartoId']; ?>" class="btn btn-warning btn-sm">Editar</a>
+                  <a href="excluir_quarto.php?id=<?php echo $quarto['QuartoId']; ?>" class="btn btn-danger btn-sm">Excluir</a>
                 </td>
               </tr>
             <?php endforeach; ?>
