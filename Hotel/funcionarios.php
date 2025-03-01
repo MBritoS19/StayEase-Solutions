@@ -12,12 +12,13 @@ $usuarioTipo = $_SESSION['usuarioTipo'];
 
 // Obter os dados do usuário logado
 if (isset($usuarioId)) {
-    $stmt = $pdo->prepare("SELECT Nome, Email FROM Usuarios WHERE id = ?");
+    $stmt = $pdo->prepare("SELECT Nome, Email, cargo FROM Usuarios WHERE id = ?");
     $stmt->execute([$usuarioId]);
     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-if ($usuarioTipo !== 'hotel') {
+// Verificar o tipo de usuário e cargo
+if ($usuarioTipo !== 'hotel' && $usuario['cargo'] !== 'gerente' && $usuario['cargo'] !== 'supervisor') {
     header("Location: index.php");
     exit;
 }
@@ -58,10 +59,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Funcionários - Hotel Lux</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-         body, html {
+        body, html {
             height: 100%;
             margin: 0;
             display: flex;
@@ -154,10 +154,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
         <a href="quartos.php">Fazer Reserva</a>
     <?php else: ?>
         <a href="perfil.php">Gerenciar</a>
-        <a href="adicionar_quarto.php">Adicionar Quartos</a>
-        <a href="servico_quarto.php">Serviço de Quarto</a>
-        <a href="baixas_pagamento.php">Baixas de Pagamento</a>
-        <a href="funcionarios.php">Cadastrar Funcionário</a>
+        <?php if ($usuario['cargo'] === 'gerente' || $usuario['cargo'] === 'supervisor'): ?>
+            <a href="adicionar_quarto.php">Adicionar Quartos</a>
+            <a href="servico_quarto.php">Serviço de Quarto</a>
+            <a href="baixas_pagamento.php">Baixas de Pagamento</a>
+            <a href="funcionarios.php">Cadastrar Funcionário</a>
+        <?php endif; ?>
     <?php endif; ?>
 </div>
 
@@ -172,6 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
             <div class="modal-body">
                 <p><strong>Nome:</strong> <?php echo htmlspecialchars($usuario['Nome']); ?></p>
                 <p><strong>Email:</strong> <?php echo htmlspecialchars($usuario['Email']); ?></p>
+                <p><strong>Cargo:</strong> <?php echo htmlspecialchars($usuario['cargo']); ?></p>
                 <p><strong>Tipo de Usuário:</strong> <?php echo $usuarioTipo === 'cliente' ? 'Cliente' : 'Hotel'; ?></p>
             </div>
             <div class="modal-footer">
@@ -180,6 +183,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
         </div>
     </div>
 </div>
+
     <div class="container mt-5 pt-5">
         <h1 class="text-center">Funcionários do Hotel Lux</h1>
         
@@ -253,7 +257,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
