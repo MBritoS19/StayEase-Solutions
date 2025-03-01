@@ -44,6 +44,17 @@ CREATE TABLE reservas (
     FOREIGN KEY (quarto_id) REFERENCES quartos(id) ON DELETE CASCADE
 );
 
+-- Tabela de Pedidos de Serviço de Quarto
+CREATE TABLE pedidos_servico_quarto (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    reserva_id INT NOT NULL,  -- Relacionamento com a reserva
+    descricao TEXT NOT NULL,   -- Descrição do pedido (ex: "Limpeza extra", "Pedido de toalhas", etc)
+    status ENUM('pendente', 'em andamento', 'concluido', 'cancelado') NOT NULL DEFAULT 'pendente',  -- Status do pedido
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Data de criação do pedido
+    FOREIGN KEY (reserva_id) REFERENCES reservas(id) ON DELETE CASCADE  -- Relacionamento com a reserva
+);
+
+
 -- Tabela de Pagamentos (Caso queira gerenciar pagamentos)
 CREATE TABLE pagamentos (
     id INT AUTO_INCREMENT PRIMARY KEY,
