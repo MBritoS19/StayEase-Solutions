@@ -90,10 +90,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </button>
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="adicionar_quarto.php">Adicionar Quartos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="servico_quarto.php">Serviço de Quarto</a></li>
-                    <li class="nav-item"><a class="nav-link" href="baixas_pagamento.php">Baixas de Pagamento</a></li>
                     <li class="nav-item"><a class="nav-link" href="perfil.php">Perfil</a></li>
+            <li class="nav-item"><a class="nav-link" href="adicionar_quarto.php">Adicionar Quartos</a></li>
+            <li class="nav-item"><a class="nav-link" href="servico_quarto.php">Serviço de Quarto</a></li>
+            <li class="nav-item"><a class="nav-link" href="funcionarios.php">Cadastrar Funcionário</a></li>
                     <li class="nav-item"><a class="nav-link" href="logout.php">Sair</a></li>
                 </ul>
             </div>
