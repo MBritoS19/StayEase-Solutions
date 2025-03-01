@@ -34,10 +34,14 @@ try {
                            ORDER BY DataSolicitacao DESC");
     $stmt->execute([$usuarioId]);
     $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    // Depuração: Exibir os pedidos para verificar se há dados
+    var_dump($pedidos); // Para ver o conteúdo dos pedidos
 } catch (PDOException $e) {
     echo "Erro ao carregar pedidos: " . $e->getMessage();
 }
 
+// Adicionar um novo pedido (se houver um POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $descricao = $_POST['descricao'];
     $numeroQuarto = $_POST['numero_quarto'];
@@ -55,7 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -63,8 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Serviço de Quarto - Hotel Lux</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
          body, html {
             height: 100%;
@@ -153,6 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 </nav>
+
 <div id="mySidebar">
     <button class="btn btn-danger w-100" onclick="w3_closeSidebar()">Fechar</button>
     <?php if ($usuarioTipo === 'cliente'): ?>
@@ -186,65 +189,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </div>
 
-    <div class="container mt-5 pt-5">
-        <h2 class="text-center mb-4">Solicitar Serviço de Quarto</h2>
-        <form method="POST" class="mb-4">
-            <div class="mb-3">
-                <label class="form-label">Descrição do Serviço</label>
-                <textarea name="descricao" class="form-control" required></textarea>
-            </div>
+<div class="container mt-5 pt-5">
+    <h2 class="text-center mb-4">Solicitar Serviço de Quarto</h2>
+    <form method="POST" class="mb-4">
+        <div class="mb-3">
+            <label class="form-label">Descrição do Serviço</label>
+            <textarea name="descricao" class="form-control" required></textarea>
+        </div>
 
-            <div class="mb-3">
-                <label class="form-label">Número do Quarto</label>
-                <input type="text" name="numero_quarto" class="form-control" required>
-            </div>
+        <div class="mb-3">
+            <label class="form-label">Número do Quarto</label>
+            <input type="text" name="numero_quarto" class="form-control" required>
+        </div>
 
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" name="taxa_custo">
-                <label class="form-check-label">Haverá uma taxa de custo adicional?</label>
-            </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" name="taxa_custo">
+            <label class="form-check-label">Haverá uma taxa de custo adicional?</label>
+        </div>
 
-            <button type="submit" class="btn btn-primary">Solicitar</button>
-        </form>
+        <button type="submit" class="btn btn-primary">Solicitar</button>
+    </form>
 
-        <h4>Meus Pedidos</h4>
-        <?php if (count($pedidos) > 0): ?>
-            <table class="table table-striped">
-                <thead>
+    <h4>Meus Pedidos</h4>
+    <?php if (count($pedidos) > 0): ?>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Status</th>
+                    <th>Data da Solicitação</th>
+                    <th>Número do Quarto</th>
+                    <th>Taxa de Custo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($pedidos as $pedido): ?>
                     <tr>
-                        <th>Descrição</th>
-                        <th>Status</th>
-                        <th>Data da Solicitação</th>
-                        <th>Número do Quarto</th>
-                        <th>Taxa de Custo</th>
+                        <td><?php echo nl2br(htmlspecialchars($pedido['Descricao'])); ?></td>
+                        <td><?php echo htmlspecialchars($pedido['Status']); ?></td>
+                        <td><?php echo date('d/m/Y H:i', strtotime($pedido['DataSolicitacao'])); ?></td>
+                        <td><?php echo htmlspecialchars($pedido['NumeroQuarto']); ?></td>
+                        <td><?php echo $pedido['TaxaCusto'] ? 'Sim' : 'Não'; ?></td>
                     </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($pedidos as $pedido): ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($pedido['Descricao']); ?></td>
-                            <td><?php echo htmlspecialchars($pedido['Status']); ?></td>
-                            <td><?php echo date('d/m/Y H:i', strtotime($pedido['DataSolicitacao'])); ?></td>
-                            <td><?php echo htmlspecialchars($pedido['NumeroQuarto']); ?></td>
-                            <td><?php echo $pedido['TaxaCusto'] ? 'Sim' : 'Não'; ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        <?php else: ?>
-            <p>Nenhum pedido de serviço encontrado.</p>
-        <?php endif; ?>
-    </div>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <p>Nenhum pedido de serviço encontrado.</p>
+    <?php endif; ?>
+</div>
 
-      <!-- Footer -->
-  <footer class="bg-dark text-white py-4">
+<!-- Footer -->
+<footer class="bg-dark text-white py-4">
     <div class="container text-center">
-      <p class="mb-0">&copy; 2025 Hotel Lux. Todos os direitos reservados.</p>
+        <p class="mb-0">&copy; 2025 Hotel Lux. Todos os direitos reservados.</p>
     </div>
-  </footer>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
     function w3_openSidebar() {
@@ -254,32 +256,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     function w3_closeSidebar() {
         document.getElementById("mySidebar").style.left = "-250px";
     }
-
-    document.getElementById('selectAll')?.addEventListener('change', function() {
-        let checkboxes = document.querySelectorAll('.selectItem');
-        checkboxes.forEach(checkbox => checkbox.checked = this.checked);
-    });
-
-    function aplicarStatusGlobal() {
-        let status = document.getElementById('statusGlobal').value;
-        if (!status) {
-            alert("Selecione um status válido.");
-            return;
-        }
-
-        let checkboxes = document.querySelectorAll('.selectItem:checked');
-        if (checkboxes.length === 0) {
-            alert("Selecione pelo menos um quarto.");
-            return;
-        }
-
-        let ids = Array.from(checkboxes).map(checkbox => checkbox.value);
-        window.location.href = `baixas_quarto.php?id=${ids.join(',')}&acao=${status}`;
-    }
 </script>
+
 </body>
 </html>
-
-
-
-        <!------ MOSTRAR OS PEDIDOS QUE FOI FEITO PROS SERVIÇOS DE QUARTO---------->
