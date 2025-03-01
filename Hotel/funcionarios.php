@@ -12,16 +12,12 @@ $usuarioTipo = $_SESSION['usuarioTipo'];
 
 // Obter os dados do usuário logado
 if (isset($usuarioId)) {
-    // Alterar para buscar o cargo da tabela funcionarios
-    $stmt = $pdo->prepare("SELECT u.Nome, u.Email, f.cargo FROM Usuarios u 
-                           JOIN Funcionarios f ON u.id = f.id 
-                           WHERE u.id = ?");
+    $stmt = $pdo->prepare("SELECT Nome, Email FROM Usuarios WHERE id = ?");
     $stmt->execute([$usuarioId]);
     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-// Verificar o tipo de usuário e cargo
-if ($usuarioTipo !== 'hotel' && $usuario['cargo'] !== 'gerente' && $usuario['cargo'] !== 'supervisor') {
+if ($usuarioTipo !== 'hotel') {
     header("Location: index.php");
     exit;
 }
@@ -55,8 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
 }
 ?>
 
-<!-- O restante do código HTML continua o mesmo -->
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -64,9 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Funcionários - Hotel Lux</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">>
     <style>
-        body, html {
+         body, html {
             height: 100%;
             margin: 0;
             display: flex;
@@ -159,12 +154,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
         <a href="quartos.php">Fazer Reserva</a>
     <?php else: ?>
         <a href="perfil.php">Gerenciar</a>
-        <?php if ($usuario['cargo'] === 'gerente' || $usuario['cargo'] === 'supervisor'): ?>
-            <a href="adicionar_quarto.php">Adicionar Quartos</a>
-            <a href="servico_quarto.php">Serviço de Quarto</a>
-            <a href="baixas_pagamento.php">Baixas de Pagamento</a>
-            <a href="funcionarios.php">Cadastrar Funcionário</a>
-        <?php endif; ?>
+        <a href="adicionar_quarto.php">Adicionar Quartos</a>
+        <a href="servico_quarto.php">Serviço de Quarto</a>
+        <a href="baixas_pagamento.php">Baixas de Pagamento</a>
+        <a href="funcionarios.php">Cadastrar Funcionário</a>
     <?php endif; ?>
 </div>
 
@@ -179,7 +172,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
             <div class="modal-body">
                 <p><strong>Nome:</strong> <?php echo htmlspecialchars($usuario['Nome']); ?></p>
                 <p><strong>Email:</strong> <?php echo htmlspecialchars($usuario['Email']); ?></p>
-                <p><strong>Cargo:</strong> <?php echo htmlspecialchars($usuario['cargo']); ?></p>
                 <p><strong>Tipo de Usuário:</strong> <?php echo $usuarioTipo === 'cliente' ? 'Cliente' : 'Hotel'; ?></p>
             </div>
             <div class="modal-footer">
@@ -188,7 +180,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
         </div>
     </div>
 </div>
-
     <div class="container mt-5 pt-5">
         <h1 class="text-center">Funcionários do Hotel Lux</h1>
         
@@ -263,6 +254,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
     function w3_openSidebar() {
@@ -271,6 +263,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
 
     function w3_closeSidebar() {
         document.getElementById("mySidebar").style.left = "-250px";
+    }
+
+    document.getElementById('selectAll')?.addEventListener('change', function() {
+        let checkboxes = document.querySelectorAll('.selectItem');
+        checkboxes.forEach(checkbox => checkbox.checked = this.checked);
+    });
+
+    function aplicarStatusGlobal() {
+        let status = document.getElementById('statusGlobal').value;
+        if (!status) {
+            alert("Selecione um status válido.");
+            return;
+        }
+
+        let checkboxes = document.querySelectorAll('.selectItem:checked');
+        if (checkboxes.length === 0) {
+            alert("Selecione pelo menos um quarto.");
+            return;
+        }
+
+        let ids = Array.from(checkboxes).map(checkbox => checkbox.value);
+        window.location.href = `baixas_quarto.php?id=${ids.join(',')}&acao=${status}`;
     }
 </script>
 </body>
