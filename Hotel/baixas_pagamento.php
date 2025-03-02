@@ -22,7 +22,7 @@ try {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pagamentoId = $_POST['pagamentoId'];
-    
+
     try {
         $stmt = $pdo->prepare("UPDATE Pagamentos SET Status = 'Pago' WHERE Id = ?");
         $stmt->execute([$pagamentoId]);
@@ -36,15 +36,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Baixa de Pagamentos - Hotel Lux</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-         body, html {
+        body,
+        html {
             height: 100%;
             margin: 0;
             display: flex;
@@ -111,138 +113,177 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </style>
 </head>
+
 <body>
     <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#"> Hotel Lux</a>
-        <button class="btn btn-outline-light me-2" onclick="w3_openSidebar()">☰</button>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarContent">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="perfilDropdown" role="button" data-bs-toggle="modal" data-bs-target="#perfilModal">
-                        <i class="fas fa-user-circle fa-lg"></i>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<div id="mySidebar">
-    <button class="btn btn-danger w-100" onclick="w3_closeSidebar()">Fechar</button>
-    <?php if ($usuarioTipo === 'cliente'): ?>
-        <a href="quartos.php">Fazer Reserva</a>
-    <?php else: ?>
-        <a href="perfil.php">Gerenciar</a>
-        <a href="adicionar_quarto.php">Adicionar Quartos</a>
-        <a href="servico_quarto.php">Serviço de Quarto</a>
-        <a href="baixas_pagamento.php">Baixas de Pagamento</a>
-        <a href="funcionarios.php">Cadastrar Funcionário</a>
-    <?php endif; ?>
-</div>
-
-<!-- Modal do Perfil -->
-<div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="perfilModalLabel">Meu Perfil</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-            </div>
-            <div class="modal-body">
-                <p><strong>Nome:</strong> <?php echo htmlspecialchars($usuario['Nome']); ?></p>
-                <p><strong>Email:</strong> <?php echo htmlspecialchars($usuario['Email']); ?></p>
-                <p><strong>Tipo de Usuário:</strong> <?php echo $usuarioTipo === 'cliente' ? 'Cliente' : 'Hotel'; ?></p>
-            </div>
-            <div class="modal-footer">
-                <a href="logout.php" class="btn btn-danger">Sair</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"> Hotel Lux</a>
+            <button class="btn btn-outline-light me-2" onclick="w3_openSidebar()">☰</button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="perfilDropdown" role="button" data-bs-toggle="modal" data-bs-target="#perfilModal">
+                            <i class="fas fa-user-circle fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </div>
-</div>
-
-    <div class="container mt-5 pt-5">
-        <h2 class="text-center mb-4">Baixa de Pagamentos</h2>
-        
-        <h4>Pagamentos Pendentes</h4>
-        <?php if (count($pagamentos) > 0): ?>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Cliente</th>
-                        <th>Check-in</th>
-                        <th>Check-out</th>
-                        <th>Valor</th>
-                        <th>Status</th>
-                        <th>Ação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($pagamentos as $pagamento): ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($pagamento['Cliente']); ?></td>
-                            <td><?php echo date('d/m/Y', strtotime($pagamento['DataCheckIn'])); ?></td>
-                            <td><?php echo date('d/m/Y', strtotime($pagamento['DataCheckOut'])); ?></td>
-                            <td>R$ <?php echo number_format($pagamento['Valor'], 2, ',', '.'); ?></td>
-                            <td><?php echo htmlspecialchars($pagamento['Status']); ?></td>
-                            <td>
-                                <form method="POST" style="display:inline;">
-                                    <input type="hidden" name="pagamentoId" value="<?php echo $pagamento['Id']; ?>">
-                                    <button type="submit" class="btn btn-success btn-sm">Confirmar Pagamento</button>
-                                </form>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+    </nav>
+    <div id="mySidebar">
+        <button class="btn btn-danger w-100" onclick="w3_closeSidebar()">Fechar</button>
+        <?php if ($usuarioTipo === 'cliente'): ?>
+            <a href="quartos.php">Fazer Reserva</a>
         <?php else: ?>
-            <p>Nenhum pagamento pendente.</p>
+            <a href="perfil.php">Gerenciar</a>
+            <a href="adicionar_quarto.php">Adicionar Quartos</a>
+            <a href="servico_quarto.php">Serviço de Quarto</a>
+            <a href="baixas_pagamento.php">Baixas de Pagamento</a>
+            <a href="funcionarios.php">Cadastrar Funcionário</a>
         <?php endif; ?>
     </div>
 
-    <!-- Footer -->
-  <footer class="bg-dark text-white py-4">
-    <div class="container text-center">
-      <p class="mb-0">&copy; 2025 Hotel Lux. Todos os direitos reservados.</p>
+    <!-- Modal do Perfil -->
+    <div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="perfilModalLabel">Meu Perfil</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Nome:</strong> <?php echo htmlspecialchars($usuario['Nome']); ?></p>
+                    <p><strong>Email:</strong> <?php echo htmlspecialchars($usuario['Email']); ?></p>
+                    <p><strong>Tipo de Usuário:</strong> <?php echo $usuarioTipo === 'cliente' ? 'Cliente' : 'Hotel'; ?></p>
+                </div>
+                <div class="modal-footer">
+                    <a href="logout.php" class="btn btn-danger">Sair</a>
+                </div>
+            </div>
+        </div>
     </div>
-  </footer>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
-    function w3_openSidebar() {
-        document.getElementById("mySidebar").style.left = "0";
-    }
+    <!-- Modal de Baixa -->
+    <div class="modal fade" id="modalBaixa" tabindex="-1" aria-labelledby="modalBaixaLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalBaixaLabel">Confirmar Baixa de Pagamento</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Tem certeza de que deseja dar baixa neste pagamento?</p>
+                </div>
+                <div class="modal-footer">
+                    <form method="POST">
+                        <input type="hidden" id="pagamentoId" name="pagamentoId">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-danger">Confirmar Baixa</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    function w3_closeSidebar() {
-        document.getElementById("mySidebar").style.left = "-250px";
-    }
+    <div class="container mt-5 pt-5">
+        <h2 class="text-center mb-4">Baixa de Pagamentos</h2>
 
-    document.getElementById('selectAll')?.addEventListener('change', function() {
-        let checkboxes = document.querySelectorAll('.selectItem');
-        checkboxes.forEach(checkbox => checkbox.checked = this.checked);
-    });
+        <h4 class="text-center mb-4">Pagamentos Pendentes</h4>
+        <form method="GET" action="funcionarios.php" class="mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control" name="pesquisa" placeholder="Pesquisar Pagamento..." value="">
+                <button class="btn btn-primary" type="submit">Buscar</button>
+            </div>
+        </form>
+        <div class="card p-4">
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Código</th>
+                        <th>Nº do Quarto</th>
+                        <th>Cliente</th>
+                        <th>Tipo do Quarto</th>
+                        <th>Tipo de Pagamento</th>
+                        <th>Data Baixa</th>
+                        <th>Data Recebimento</th>
+                        <th>Valor (R$)</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>001</td>
+                        <td>102</td>
+                        <td>João Silva</td>
+                        <td>Duplex</td>
+                        <td>Cartão de Crédito</td>
+                        <td>28/02/2025</td>
+                        <td>27/02/2025</td>
+                        <td>350,00</td>
+                        <td><button class="btn btn-sm btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#modalBaixa" onclick="setPagamentoId(1)">Baixa</button></td>
+                    </tr>
+                    <tr>
+                        <td>002</td>
+                        <td>205</td>
+                        <td>Maria Oliveira</td>
+                        <td>Simples</td>
+                        <td>Pix</td>
+                        <td>26/02/2025</td>
+                        <td>25/02/2025</td>
+                        <td>280,00</td>
+                        <td><button class="btn btn-sm btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#modalBaixa" onclick="setPagamentoId(2)">Baixa</button></td>
+                    </tr>
+                    <tr>
+                        <td>003</td>
+                        <td>308</td>
+                        <td>Carlos Mendes</td>
+                        <td>Luxo</td>
+                        <td>Boleto</td>
+                        <td>24/02/2025</td>
+                        <td>23/02/2025</td>
+                        <td>500,00</td>
+                        <td><button class="btn btn-sm btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#modalBaixa" onclick="setPagamentoId(3)">Baixa</button></td>
+                    </tr>
+                    <tr>
+                        <td>004</td>
+                        <td>412</td>
+                        <td>Ana Souza</td>
+                        <td>Simples</td>
+                        <td>Dinheiro</td>
+                        <td>22/02/2025</td>
+                        <td>21/02/2025</td>
+                        <td>150,00</td>
+                        <td><button class="btn btn-sm btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#modalBaixa" onclick="setPagamentoId(4)">Baixa</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    function aplicarStatusGlobal() {
-        let status = document.getElementById('statusGlobal').value;
-        if (!status) {
-            alert("Selecione um status válido.");
-            return;
+    <footer>
+        <p>&copy; 2025 Hotel Lux. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function setPagamentoId(id) {
+            document.getElementById('pagamentoId').value = id;
         }
-
-        let checkboxes = document.querySelectorAll('.selectItem:checked');
-        if (checkboxes.length === 0) {
-            alert("Selecione pelo menos um quarto.");
-            return;
+        
+        function w3_openSidebar() {
+            document.getElementById("mySidebar").style.left = "0";
         }
+        
+        function w3_closeSidebar() {
+            document.getElementById("mySidebar").style.left = "-250px";
+        }
+    </script>
 
-        let ids = Array.from(checkboxes).map(checkbox => checkbox.value);
-        window.location.href = `baixas_quarto.php?id=${ids.join(',')}&acao=${status}`;
-    }
-</script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
+
 </html>
