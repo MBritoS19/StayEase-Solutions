@@ -301,7 +301,7 @@ if ($usuarioTipo === 'hotel') {
                     <td>01/03/2025</td>
                     <td>05/03/2025</td>
                     <td>
-                        <button class="btn btn-sm btn-success ms-2" data-bs-target="#modalBaixa" onclick="">Serviço de Quarto</button>
+                        <button class="btn btn-sm btn-success ms-2" onclick="window.location.href='servico_quarto.php'">Serviço de Quarto</button>
                         <button class="btn btn-sm btn-secondary ms-2" onclick="abrirModalEdicao(
     '1', 
     '101', 
