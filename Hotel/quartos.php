@@ -20,9 +20,11 @@ $result = $conexao->query($sql);
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Quartos Disponíveis - Hotel Lux</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+     
     body {
       background: #f8f9fa;
     }
@@ -73,22 +75,42 @@ $result = $conexao->query($sql);
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
     <div class="container">
-      <a class="navbar-brand" href="#">Hotel Lux</a>
+      <a class="navbar-brand" href="index.php">Hotel Lux</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
          <ul class="navbar-nav ms-auto">
-           <li class="nav-item"><a class="nav-link" href="index.php">Início</a></li>
+         <li class="nav-item"><a class="nav-link active" href="teste.php">Ver Reserva</a></li>
            <li class="nav-item"><a class="nav-link active" href="quartos.php">Quartos Disponíveis</a></li>
+           <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="perfilDropdown" role="button" data-bs-toggle="modal" data-bs-target="#perfilModal">
+                            <i class="fas fa-user-circle fa-lg"></i>
+                        </a>
+                    </li>
          </ul>
       </div>
     </div>
   </nav>
 
-  <?php //include("./components/navbar.php"); ?>
-
-  <?php //include("./components/modal_perfil.php"); ?>
+  <div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="perfilModalLabel">Meu Perfil</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Nome:</strong>Teste</p>
+                    <p><strong>Email:</strong> cliente@cliente </p>
+                    <p><strong>Tipo de Usuário:</strong> cliente</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="logout.php" class="btn btn-danger">Sair</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
   <!-- Seção Hero -->
   <header class="hero">
@@ -161,11 +183,10 @@ $result = $conexao->query($sql);
     </div>
   </div>
 
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2025 Hotel Lux. Todos os direitos reservados.</p>
-    </div>
-  </footer>
+   <!-- Footer -->
+   <footer class="bg-dark text-white py-4 text-center">
+        <p>&copy; 2025 Hotel Lux. Todos os direitos reservados.</p>
+    </footer>
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
