@@ -119,6 +119,31 @@ if ($usuarioTipo === 'cliente') {
 
 
     <h5>Minhas Reservas</h5>
+    <?php if (count($minhasReservas) > 0): ?>
+        <div class="row">
+            <?php foreach ($minhasReservas as $reserva): ?>
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <img src="path/to/quarto-image.jpg" class="card-img-top" alt="Imagem do Quarto">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo htmlspecialchars($reserva['QuartoNumero']); ?> - <?php echo htmlspecialchars($reserva['QuartoTipo']); ?></h5>
+                            <p class="card-text">Preço: R$ <?php echo number_format($reserva['Preco'], 2, ',', '.'); ?></p>
+                            <p class="card-text"><strong>Check-in:</strong> <?php echo date('d/m/Y', strtotime($reserva['data_checkin'])); ?></p>
+                            <p class="card-text"><strong>Check-out:</strong> <?php echo date('d/m/Y', strtotime($reserva['data_checkout'])); ?></p>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php else: ?>
+        <p>Você ainda não fez nenhuma reserva.</p>
+    <?php endif; ?>
+</div>
+<!-- Conteúdo principal -->
+<div class="container mt-5 pt-5">
+
+
+    <h5>Minhas Reservas</h5>
         <div class="row">
                 <div class="col-md-4">
                     <div class="card mb-4">
@@ -138,9 +163,6 @@ if ($usuarioTipo === 'cliente') {
         </div>
 
 </div>
-
-
-
 <!-- Footer -->
 <footer class="bg-dark text-white py-4 text-center">
     <p>&copy; 2025 Hotel Lux. Todos os direitos reservados.</p>
