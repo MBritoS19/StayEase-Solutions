@@ -119,26 +119,27 @@ if ($usuarioTipo === 'cliente') {
 
 
     <h5>Minhas Reservas</h5>
-    <?php if (count($minhasReservas) > 0): ?>
         <div class="row">
-            <?php foreach ($minhasReservas as $reserva): ?>
                 <div class="col-md-4">
                     <div class="card mb-4">
-                        <img src="path/to/quarto-image.jpg" class="card-img-top" alt="Imagem do Quarto">
+                        <img src="uploads/1740695620_teste.jpeg" class="card-img-top" alt="Imagem do Quarto">
                         <div class="card-body">
-                            <h5 class="card-title"><?php echo htmlspecialchars($reserva['QuartoNumero']); ?> - <?php echo htmlspecialchars($reserva['QuartoTipo']); ?></h5>
-                            <p class="card-text">Preço: R$ <?php echo number_format($reserva['Preco'], 2, ',', '.'); ?></p>
-                            <p class="card-text"><strong>Check-in:</strong> <?php echo date('d/m/Y', strtotime($reserva['data_checkin'])); ?></p>
-                            <p class="card-text"><strong>Check-out:</strong> <?php echo date('d/m/Y', strtotime($reserva['data_checkout'])); ?></p>
+                            <h5 class="card-title">101</h5>
+                            <hr>
+                            <p class="card-text">Preço: R$ 200</p>
+                            <p class="card-text">01/03/2025</p>
+                            <p class="card-text">05/03/2025</p>
+                            <hr>
+                            <h5 class="card-title">Reservado Sr.teste</h5>
                         </div>
                     </div>
                 </div>
-            <?php endforeach; ?>
+            
         </div>
-    <?php else: ?>
-        <p>Você ainda não fez nenhuma reserva.</p>
-    <?php endif; ?>
+
 </div>
+
+
 
 <!-- Footer -->
 <footer class="bg-dark text-white py-4 text-center">
