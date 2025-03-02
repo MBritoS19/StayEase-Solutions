@@ -86,6 +86,10 @@ $result = $conexao->query($sql);
     </div>
   </nav>
 
+  <?php //include("./components/navbar.php"); ?>
+
+  <?php //include("./components/modal_perfil.php"); ?>
+
   <!-- Seção Hero -->
   <header class="hero">
     <div class="hero-overlay"></div>

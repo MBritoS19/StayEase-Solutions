@@ -12,7 +12,7 @@ $usuarioId = $_SESSION['usuarioId'];
 $usuarioTipo = $_SESSION['usuarioTipo'];
 
 // Buscar dados do usuário logado
-try {
+/*try {
     $stmt = $pdo->prepare("SELECT Nome, Email FROM usuarios WHERE Id = ?");
     $stmt->execute([$usuarioId]);
     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -23,7 +23,7 @@ try {
 } catch (Exception $e) {
     echo "Erro ao carregar usuário: " . $e->getMessage();
     exit;
-}
+}*/
 
 // Buscar pedidos de serviço de quarto do cliente
 $pedidos = [];

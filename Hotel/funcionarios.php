@@ -130,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
 </head>
 <body>
     <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="#"> Hotel Lux</a>
         <button class="btn btn-outline-light me-2" onclick="w3_openSidebar()">☰</button>
@@ -150,19 +150,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
 </nav>
 <div id="mySidebar">
     <button class="btn btn-danger w-100" onclick="w3_closeSidebar()">Fechar</button>
-    <?php if ($usuarioTipo === 'cliente'): ?>
+    <?php //if ($usuarioTipo === 'cliente'): ?>
         <a href="quartos.php">Fazer Reserva</a>
-    <?php else: ?>
+    <?php //else: ?>
         <a href="perfil.php">Gerenciar</a>
         <a href="adicionar_quarto.php">Adicionar Quartos</a>
         <a href="servico_quarto.php">Serviço de Quarto</a>
         <a href="baixas_pagamento.php">Baixas de Pagamento</a>
         <a href="funcionarios.php">Cadastrar Funcionário</a>
-    <?php endif; ?>
-</div>
+    <?php //endif; ?>
+</div> -->
 
 <!-- Modal do Perfil -->
-<div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -170,16 +170,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
             </div>
             <div class="modal-body">
-                <p><strong>Nome:</strong> <?php echo htmlspecialchars($usuario['Nome']); ?></p>
-                <p><strong>Email:</strong> <?php echo htmlspecialchars($usuario['Email']); ?></p>
-                <p><strong>Tipo de Usuário:</strong> <?php echo $usuarioTipo === 'cliente' ? 'Cliente' : 'Hotel'; ?></p>
+                <p><strong>Nome:</strong> <?php //echo htmlspecialchars($usuario['Nome']); ?></p>
+                <p><strong>Email:</strong> <?php //echo htmlspecialchars($usuario['Email']); ?></p>
+                <p><strong>Tipo de Usuário:</strong> <?php //echo $usuarioTipo === 'cliente' ? 'Cliente' : 'Hotel'; ?></p>
             </div>
             <div class="modal-footer">
                 <a href="logout.php" class="btn btn-danger">Sair</a>
             </div>
         </div>
     </div>
-</div>
+</div>-->
+
+<?php include("./components/navbar.php"); ?>
+
+<?php include("./components/modal_perfil.php"); ?>
+
     <div class="container mt-5 pt-5">
         <h1 class="text-center">Funcionários do Hotel Lux</h1>
         
