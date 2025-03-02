@@ -41,5 +41,6 @@ $usuarioTipo = $_SESSION['usuarioTipo']; // 'cliente' ou 'hotel'
             <a href="servico_quarto.php">Serviço de Quarto</a>
             <a href="baixas_pagamento.php">Baixas de Pagamento</a>
             <a href="funcionarios.php">Cadastrar Funcionário</a>
+            <a href="criar_reserva.php">Cadastrar Reserva</a>
         <?php endif; ?>
     </div>
