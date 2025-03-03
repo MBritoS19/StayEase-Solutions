@@ -86,21 +86,49 @@ if ($usuarioTipo !== 'hotel') {
                     <label for="cliente" class="form-label">Nome do Cliente</label>
                     <input type="text" class="form-control" id="cliente" name="cliente" required>
                 </div>
-                <div class="mb-3">
-                    <label for="quarto" class="form-label">Número do Quarto</label>
-                    <input type="text" class="form-control" id="quarto" name="quarto" required>
+                <div class="mb-3 row">
+                    <div class="col-md-6">
+                        <label for="quarto" class="form-label">Número do Quarto</label>
+                        <input type="text" class="form-control" id="quarto" name="quarto" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="tipo_quarto" class="form-label">Tipo de Quarto</label>
+                        <select class="form-control" id="tipo_quarto" name="tipo_quarto" required>
+                            <option value="solteiro">Solteiro</option>
+                            <option value="casal">Casal</option>
+                            <option value="luxo">Luxo</option>
+                            <option value="presidencial">Presidencial</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <div class="col-md-6">
+                        <label for="data_checkin" class="form-label">Data de Check-in</label>
+                        <input type="date" class="form-control" id="data_checkin" name="data_checkin" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="data_checkout" class="form-label">Data de Check-out</label>
+                        <input type="date" class="form-control" id="data_checkout" name="data_checkout" required>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <div class="col-md-6">
+                        <label for="valor" class="form-label">Valor da Reserva</label>
+                        <input type="text" class="form-control" id="valor" name="valor" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="pension" class="form-label">Tipo de Pensão</label>
+                        <select class="form-control" id="pension" name="pension" required>
+                            <option value="completa">Pensão Completa</option>
+                            <option value="meia">Meia Pensão</option>
+                            <option value="cafe">Café da Manhã</option>
+                            <option value="nenhuma">Sem Pensão</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="mb-3">
-                    <label for="data_checkin" class="form-label">Data de Check-in</label>
-                    <input type="date" class="form-control" id="data_checkin" name="data_checkin" required>
-                </div>
-                <div class="mb-3">
-                    <label for="data_checkout" class="form-label">Data de Check-out</label>
-                    <input type="date" class="form-control" id="data_checkout" name="data_checkout" required>
-                </div>
-                <div class="mb-3">
-                    <label for="valor" class="form-label">Valor da Reserva</label>
-                    <input type="text" class="form-control" id="valor" name="valor" required>
+                    <label for="obs" class="form-label">Observações</label>
+                    <textarea class="form-control" id="obs" name="obs" rows="3"></textarea>
                 </div>
                 <button type="submit" class="btn btn-success">Cadastrar Reserva</button>
             </form>
