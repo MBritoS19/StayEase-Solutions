@@ -236,7 +236,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <!-- Linha com dados estáticos -->
                 <tr>
                     <td>Troca de toalhas</td>
-                    <td>Pendente</td>
+                    <td>
+                        <select id="statusGlobal" class="form-select form-select-sm ms-2 w-auto">
+                            <option value="pendente" selected>Pendente</option>
+                            <option value="em_andamento">Em andamento</option>
+                            <option value="concluido">Concluído</option>
+                        </select>
+                    </td>
                     <td>02/03/2025 14:30</td>
                     <td>101</td>
                     <td>Sim</td>
