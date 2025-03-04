@@ -38,18 +38,20 @@ $funcionarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['acao'] === 'cadastrar') {
     $nome = $_POST['nome'];
     $email = $_POST['email'];
+    $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT); // Aplicando hash na senha
     $cargo = $_POST['cargo'];
     $telefone = $_POST['telefone'];
 
     try {
-        $stmt = $pdo->prepare("INSERT INTO Funcionarios (nome, email, cargo, telefone) VALUES (?, ?, ?, ?)");
-        $stmt->execute([$nome, $email, $cargo, $telefone]);
+        $stmt = $pdo->prepare("INSERT INTO Funcionarios (nome, email, senha, cargo, telefone) VALUES (?, ?, ?, ?, ?)");
+        $stmt->execute([$nome, $email, $senha, $cargo, $telefone]);
         header("Location: funcionarios.php");
     } catch (PDOException $e) {
         echo "Erro ao cadastrar funcionário: " . $e->getMessage();
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -243,6 +245,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
                         <div class="mb-3">
                             <label for="cargo" class="form-label">Cargo</label>
                             <input type="text" class="form-control" id="cargo" name="cargo" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="senha" class="form-label">Senha</label>
+                            <input type="text" class="form-control" id="senha" name="senha" required>
                         </div>
                         <div class="mb-3">
                             <label for="telefone" class="form-label">Telefone</label>
