@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('dbHotel.php'); 
+include('dbHotel.php');
 
 // Verifica se o usuário está logado e tem permissão para adicionar quartos
 if (!isset($_SESSION['usuarioId']) || $_SESSION['usuarioTipo'] !== 'hotel') {
@@ -59,15 +59,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Adicionar Quarto - Hotel Lux</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Adicionar Quarto - Hotel Lux</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">>
     <style>
-         body, html {
+        body,
+        html {
             height: 100%;
             margin: 0;
             display: flex;
@@ -134,10 +136,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </style>
 </head>
+
 <body>
 
-<!-- Navbar -->
-<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <!-- Navbar -->
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="#"> Hotel Lux</a>
         <button class="btn btn-outline-light me-2" onclick="w3_openSidebar()">☰</button>
@@ -157,19 +160,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </nav>
 <div id="mySidebar">
     <button class="btn btn-danger w-100" onclick="w3_closeSidebar()">Fechar</button>
-    <?php //if ($usuarioTipo === 'cliente'): ?>
+    <?php //if ($usuarioTipo === 'cliente'): 
+    ?>
         <a href="quartos.php">Fazer Reserva</a>
-    <?php //else: ?>
+    <?php //else: 
+    ?>
       <a href="perfil.php">Gerenciar</a>
         <a href="adicionar_quarto.php">Adicionar Quartos</a>
         <a href="servico_quarto.php">Serviço de Quarto</a>
         <a href="baixas_pagamento.php">Baixas de Pagamento</a>
         <a href="funcionarios.php">Cadastrar Funcionário</a>
-    <?php //endif; ?>
+    <?php //endif; 
+    ?>
 </div> -->
 
-<!-- Modal do Perfil -->
-<!-- <div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
+    <!-- Modal do Perfil -->
+    <!-- <div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -188,91 +194,121 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </div> -->
 
-<?php include("./components/navbar.php"); ?>
+    <?php include("./components/navbar.php"); ?>
 
-<?php include("./components/modal_perfil.php"); ?>
+    <?php include("./components/modal_perfil.php"); ?>
 
-<!-- Conteúdo Principal -->
-<div class="container mt-5">
-  <h3 class="mb-4">Adicionar Novo Quarto</h3>
+    <!-- Conteúdo Principal -->
+    <div class="container mt-5">
+        <h3 class="mb-4">Adicionar Novo Quarto</h3>
 
-  <?php if (isset($sucesso)): ?>
-    <div class="alert alert-success"><?php echo $sucesso; ?></div>
-  <?php elseif (isset($erro)): ?>
-    <div class="alert alert-danger"><?php echo $erro; ?></div>
-  <?php endif; ?>
+        <?php if (isset($sucesso)): ?>
+            <div class="alert alert-success"><?php echo $sucesso; ?></div>
+        <?php elseif (isset($erro)): ?>
+            <div class="alert alert-danger"><?php echo $erro; ?></div>
+        <?php endif; ?>
 
-  <form method="POST" enctype="multipart/form-data">
-    <div class="mb-3">
-      <label class="form-label">Número do Quarto</label>
-      <input type="text" name="numero" class="form-control" required>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label">Número do Quarto</label>
+                <input type="text" name="numero" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Tipo</label>
+                <select name="tipo" class="form-select" required>
+                    <option value="Simples">Simples</option>
+                    <option value="Duplo">Duplo</option>
+                    <option value="Luxo">Luxo</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Preço por Noite (R$)</label>
+                <input type="number" name="preco" step="0.01" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Descrição</label>
+                <textarea name="descricao" class="form-control" rows="3" required></textarea>
+            </div>
+
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" name="taxa_custo" id="taxaCustoCheckbox">
+                <label class="form-check-label">Informar limites de hospedes?</label>
+            </div>
+
+            <div class="mb-3" id="campoValor" style="display: none; gap: 10px; align-items: center;">
+            <div class="mb-3" style="display: none; display: flex; gap: 10px; align-items: center;">
+    <div>
+        <label class="form-label">Adultos</label>
+        <input type="number" name="valor_taxa" class="form-control" placeholder="Informe o valor" step="0.01">
     </div>
-    <div class="mb-3">
-      <label class="form-label">Tipo</label>
-      <select name="tipo" class="form-select" required>
-        <option value="Simples">Simples</option>
-        <option value="Duplo">Duplo</option>
-        <option value="Luxo">Luxo</option>
-      </select>
+    <div>
+        <label class="form-label">Crianças</label>
+        <input type="number" name="valor_taxa" class="form-control" placeholder="Informe o valor" step="0.01">
     </div>
-    <div class="mb-3">
-      <label class="form-label">Preço por Noite (R$)</label>
-      <input type="number" name="preco" step="0.01" class="form-control" required>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Descrição</label>
-      <textarea name="descricao" class="form-control" rows="3" required></textarea>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Imagem do Quarto</label>
-      <input type="file" name="imagem" class="form-control" accept="image/*">
-    </div>
-    <button type="submit" class="btn btn-primary">Adicionar Quarto</button>
-    <a href="perfil.php" class="btn btn-secondary">Voltar</a>
-  </form>
 </div>
+            </div>
 
-<!-- Footer -->
-<footer class="bg-dark text-white py-4">
-    <div class="container text-center">
-      <p class="mb-0">&copy; 2025 Hotel Lux. Todos os direitos reservados.</p>
+            <div class="mb-3">
+                <label class="form-label">Imagem do Quarto</label>
+                <input type="file" name="imagem" class="form-control" accept="image/*">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Adicionar Quarto</button>
+            <a href="perfil.php" class="btn btn-secondary">Voltar</a>
+        </form>
     </div>
-  </footer>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2025 Hotel Lux. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
-<script>
-    function w3_openSidebar() {
-        document.getElementById("mySidebar").style.left = "0";
-    }
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    function w3_closeSidebar() {
-        document.getElementById("mySidebar").style.left = "-250px";
-    }
-
-    document.getElementById('selectAll')?.addEventListener('change', function() {
-        let checkboxes = document.querySelectorAll('.selectItem');
-        checkboxes.forEach(checkbox => checkbox.checked = this.checked);
-    });
-
-    function aplicarStatusGlobal() {
-        let status = document.getElementById('statusGlobal').value;
-        if (!status) {
-            alert("Selecione um status válido.");
-            return;
+    <script>
+        function w3_openSidebar() {
+            document.getElementById("mySidebar").style.left = "0";
         }
 
-        let checkboxes = document.querySelectorAll('.selectItem:checked');
-        if (checkboxes.length === 0) {
-            alert("Selecione pelo menos um quarto.");
-            return;
+        function w3_closeSidebar() {
+            document.getElementById("mySidebar").style.left = "-250px";
         }
 
-        let ids = Array.from(checkboxes).map(checkbox => checkbox.value);
-        window.location.href = `baixas_quarto.php?id=${ids.join(',')}&acao=${status}`;
-    }
-</script>
+        document.getElementById('selectAll')?.addEventListener('change', function() {
+            let checkboxes = document.querySelectorAll('.selectItem');
+            checkboxes.forEach(checkbox => checkbox.checked = this.checked);
+        });
+
+        function aplicarStatusGlobal() {
+            let status = document.getElementById('statusGlobal').value;
+            if (!status) {
+                alert("Selecione um status válido.");
+                return;
+            }
+
+            let checkboxes = document.querySelectorAll('.selectItem:checked');
+            if (checkboxes.length === 0) {
+                alert("Selecione pelo menos um quarto.");
+                return;
+            }
+
+            let ids = Array.from(checkboxes).map(checkbox => checkbox.value);
+            window.location.href = `baixas_quarto.php?id=${ids.join(',')}&acao=${status}`;
+        }
+
+        document.getElementById('taxaCustoCheckbox').addEventListener('change', function() {
+            var campoValor = document.getElementById('campoValor');
+            if (this.checked) {
+                campoValor.style.display = 'block'; // Exibe o campo de valor
+            } else {
+                campoValor.style.display = 'none'; // Esconde o campo de valor
+            }
+        });
+    </script>
 </body>
+
 </html>

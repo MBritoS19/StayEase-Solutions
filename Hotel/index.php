@@ -89,6 +89,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     .w3-modal-content { border-radius: 10px; }
         .modal-header { font-size: 1.5rem; font-weight: bold; color: #333; }
 
+        .card {
+      height: 100%;
+      transition: transform var(--transition-speed);
+      border: none;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-img-top {
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .form-control:focus {
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+
+    .required-asterisk {
+      color: #dc3545;
+      margin-left: 3px;
+    }
   </style>
 </head>
 <body>
@@ -96,8 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Hotel Lux</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+    <a class="navbar-brand" href="#"><i class="bi bi-building fs-4 me-2"></i>Hotel Lux</a>      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarContent">
@@ -109,10 +132,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <li class="nav-item"><a class="nav-link" href="#contact">Contato</a></li>
           <li class="nav-item">
             <?php if ($logado): ?>
-                <a class="nav-link text-white" href="perfil.php">Perfil</a>
+                <a class="nav-link text-white" href="perfil.php"><i class="bi bi-person-circle me-2"></i>Perfil</a>
             <?php else: ?>
-                <button onclick="document.getElementById('loginModal').style.display='block'" class="w3-button w3-blue w3-round">Login</button>
-            <?php endif; ?>
+                <button onclick="document.getElementById('loginModal').style.display='block'" class="w3-button w3-blue w3-round"><i class="bi bi-box-arrow-in-right me-2"></i>Login</button>
+           <?php endif; ?>
         </li>
         </ul>
       </div>
@@ -156,6 +179,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <span onclick="document.getElementById('cadastroModal').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright">×</span>
         </div>
 
+        <div class="w3-container text-center">
+            <h3>Crie sua conta conosco</h3>
+            <p>Preencha os campos abaixo para se cadastrar e ter acesso aos nossos serviços.</p>
+        </div>
+
         <form class="w3-container" method="POST">
             <input type="hidden" name="cadastro">
             <div class="w3-section">
@@ -190,7 +218,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="container hero-content text-center">
       <h1 class="display-4 fw-bold">Bem-vindo ao Hotel Lux</h1>
       <p class="lead">Sua estadia de luxo e conforto em um ambiente sofisticado</p>
-      <a href="quartos.php" class="btn btn-primary btn-lg mt-3">Reserve Agora</a>
+      <a href="quartos.php" class="btn btn-primary btn-lg mt-3"><i class="bi bi-calendar-check me-2"></i>Reservar Agora</a>
     </div>
   </header>
 
@@ -202,41 +230,71 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p>Experimente o melhor em conforto e elegância</p>
       </div>
       <div class="row">
-        <!-- Quarto Deluxe -->
-        <div class="col-md-4 mb-4">
-          <div class="card">
-            <img src="https://source.unsplash.com/600x400/?room" class="card-img-top" alt="Quarto Deluxe">
-            <div class="card-body">
-              <h5 class="card-title">Quarto Deluxe</h5>
-              <p class="card-text">Quarto espaçoso com vista panorâmica e comodidades exclusivas.</p>
-              <a href="#reservation" class="btn btn-outline-primary">Ver Detalhes</a>
+<!-- Quarto Deluxe -->
+<div class="col-lg-4 col-md-6">
+          <div class="card h-100">
+            <img src="https://source.unsplash.com/600x400/?luxury-room"
+              class="card-img-top"
+              alt="Quarto Deluxe com cama king-size e vista panorâmica"
+              loading="lazy">
+            <div class="card-body d-flex flex-column">
+              <h3 class="h5 card-title">Deluxe Room</h3>
+              <p class="card-text text-muted">32m² • Vista para o mar • Wi-Fi premium</p>
+              <ul class="list-unstyled mb-4">
+                <li class="mb-2"><i class="bi bi-person-fill me-2"></i>Até 2 adultos</li>
+                <li class="mb-2"><i class="bi bi-tv me-2"></i>Smart TV 50"</li>
+                <li><i class="bi bi-lock me-2"></i>Cofre digital</li>
+              </ul>
+              <div class="mt-auto">
+                <a href="#reservation" class="btn btn-primary w-100 stretched-link">Detalhes</a>
+              </div>
             </div>
           </div>
         </div>
+
         <!-- Suite Presidencial -->
-        <div class="col-md-4 mb-4">
-          <div class="card">
-            <img src="1740785290_Captura de tela 2022-08-14 022249.png" class="card-img-top" alt="Suite Presidencial">
-            <div class="card-body">
-              <h5 class="card-title">Suite Presidencial</h5>
-              <p class="card-text">O ápice do luxo, com sala de estar privativa e serviços exclusivos.</p>
-              <a href="#reservation" class="btn btn-outline-primary">Ver Detalhes</a>
+        <div class="col-lg-4 col-md-6">
+          <div class="card h-100">
+            <img src="https://source.unsplash.com/600x400/?luxury-room"
+              class="card-img-top"
+              alt="Quarto precidencial com cama king-size e vista panorâmica"
+              loading="lazy">
+            <div class="card-body d-flex flex-column">
+              <h3 class="h5 card-title">Presidency Suite</h3>
+              <p class="card-text text-muted">40m² • Vista para o mar • Wi-Fi plus</p>
+              <ul class="list-unstyled mb-4">
+                <li class="mb-2"><i class="bi bi-person-fill me-2"></i>Até 4 adultos</li>
+                <li class="mb-2"><i class="bi bi-tv me-2"></i>Smart TV 60"</li>
+                <li><i class="bi bi-lock me-2"></i>Cofre digital</li>
+              </ul>
+              <div class="mt-auto">
+                <a href="#reservation" class="btn btn-primary w-100 stretched-link">Detalhes</a>
+              </div>
             </div>
           </div>
         </div>
+
         <!-- Quarto Executivo -->
-        <div class="col-md-4 mb-4">
-          <div class="card">
-            <img src="https://source.unsplash.com/600x400/?hotel-room" class="card-img-top" alt="Quarto Executivo">
-            <div class="card-body">
-              <h5 class="card-title">Quarto Executivo</h5>
-              <p class="card-text">Ideal para viajantes de negócios, com todo conforto e tecnologia.</p>
-              <a href="#reservation" class="btn btn-outline-primary">Ver Detalhes</a>
+        <div class="col-lg-4 col-md-6">
+          <div class="card h-100">
+            <img src="https://source.unsplash.com/600x400/?luxury-room"
+              class="card-img-top"
+              alt="Quarto Executivo com cama king-size e vista panorâmica"
+              loading="lazy">
+            <div class="card-body d-flex flex-column">
+              <h3 class="h5 card-title">Executive Room</h3>
+              <p class="card-text text-muted">56m² • Vista para o mar • Wi-Fi platinum</p>
+              <ul class="list-unstyled mb-4">
+                <li class="mb-2"><i class="bi bi-person-fill me-2"></i>Até 6 adultos</li>
+                <li class="mb-2"><i class="bi bi-tv me-2"></i>Smart TV 70"</li>
+                <li><i class="bi bi-lock me-2"></i>Cofre digital</li>
+              </ul>
+              <div class="mt-auto">
+                <a href="#reservation" class="btn btn-primary w-100 stretched-link">Detalhes</a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
   </section>
 
   <!-- Seção de Serviços -->
@@ -262,6 +320,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <h4 class="mt-3">Serviço de Quarto</h4>
           <p>Atendimento 24 horas para garantir sua comodidade.</p>
         </div>
+
+        <div class="text-center mb-5">
+        <h2>Serviços</h2>
+        <p>Descubra nossas ofertas exclusivas</p>
+      </div>
+      <div class="row">
+        <div class="col-md-4 text-center mb-4">
+          <i class="bi bi-wifi fs-1"></i>
+          <h4 class="mt-3">Wi-Fi Grátis</h4>
+          <p>Conexão rápida e segura em todas as áreas do hotel.</p>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+          <i class="bi bi-cup-straw fs-1"></i>
+          <h4 class="mt-3">Restaurante</h4>
+          <p>Culinária refinada e ambiente aconchegante para suas refeições.</p>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+          <i class="bi bi-bell fs-1"></i>
+          <h4 class="mt-3">Serviço de Quarto</h4>
+          <p>Atendimento 24 horas para garantir sua comodidade.</p>
+        </div>
+
       </div>
     </div>
   </section>
@@ -294,31 +374,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <!-- Seção de Contato -->
   <section id="contact" class="py-5">
     <div class="container">
-      <div class="text-center mb-5">
-        <h2>Contato</h2>
-        <p>Entre em contato e tire suas dúvidas</p>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-md-8">
-          <form>
-            <div class="mb-3">
-              <label for="name" class="form-label">Nome</label>
-              <input type="text" class="form-control" id="name" placeholder="Seu nome">
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">E-mail</label>
-              <input type="email" class="form-control" id="email" placeholder="Seu e-mail">
-            </div>
-            <div class="mb-3">
-              <label for="message" class="form-label">Mensagem</label>
-              <textarea class="form-control" id="message" rows="4" placeholder="Sua mensagem"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
-          </form>
+        <div class="text-center mb-4">
+            <h2 class="fw-bold">Entre em Contato</h2>
+            <p class="text-muted">Estamos disponíveis para esclarecer suas dúvidas</p>
         </div>
-      </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                <p><strong>Telefones:</strong> <span class="text-muted">(11) 1234-5678</span> | <span class="text-muted">(11) 8765-4321</span></p>
+                <p><strong>E-mail:</strong> 
+                    <a href="mailto:contato@hotel.com" class="text-decoration-none" aria-label="Enviar e-mail para contato@hotel.com">
+                        contato@hotel.com
+                    </a>
+                </p>
+                <p><strong>WhatsApp:</strong> 
+                    <a href="https://wa.me/5511999999999" target="_blank" class="text-decoration-none" aria-label="Conversar pelo WhatsApp">
+                        (11) 99999-9999
+                    </a>
+                </p>
+            </div>
+        </div>
     </div>
-  </section>
+</section>
 
   <!-- Footer -->
   <footer class="bg-dark text-white py-4">

@@ -102,13 +102,29 @@ if ($usuarioTipo !== 'hotel') {
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="data_checkin" class="form-label">Data de Check-in</label>
                         <input type="date" class="form-control" id="data_checkin" name="data_checkin" required>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <label for="hora_checkin" class="form-label">Hora de Inicio do Check-in</label>
+                        <input type="time" class="form-control" id="hora_checkin" name="hora_checkin" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="hora_saida_checkin" class="form-label">Hora Limite do do Check-in</label>
+                        <input type="time" class="form-control" id="hora_saida_checkin" name="hora_saida_checkin" required>
+                    </div>
+                    <div class="col-md-4">
                         <label for="data_checkout" class="form-label">Data de Check-out</label>
                         <input type="date" class="form-control" id="data_checkout" name="data_checkout" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="hora_checkout" class="form-label">Hora de Inicio Check-out</label>
+                        <input type="time" class="form-control" id="hora_checkout" name="hora_checkout" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="hora_saida_checkout" class="form-label">Hora Limite do Check-out</label>
+                        <input type="time" class="form-control" id="hora_saida_checkout" name="hora_saida_checkout" required>
                     </div>
                 </div>
                 <div class="mb-3 row">

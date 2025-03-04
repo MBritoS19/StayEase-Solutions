@@ -41,6 +41,7 @@ if ($usuarioTipo === 'cliente') {
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,7 +49,8 @@ if ($usuarioTipo === 'cliente') {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        body, html {
+        body,
+        html {
             height: 100%;
             margin: 0;
             display: flex;
@@ -72,103 +74,113 @@ if ($usuarioTipo === 'cliente') {
         }
     </style>
 </head>
+
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Hotel Lux</a>
-        <div class="collapse navbar-collapse" id="navbarContent">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a href="quartos.php" class="nav-link">Fazer Reserva</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="perfilDropdown" role="button" data-bs-toggle="modal" data-bs-target="#perfilModal">
-                        <i class="fas fa-user-circle fa-lg"></i>
-                    </a>
-                </li>
-            </ul>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Hotel Lux</a>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="quartos.php" class="nav-link">Fazer Reserva</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="perfilDropdown" role="button" data-bs-toggle="modal" data-bs-target="#perfilModal">
+                            <i class="fas fa-user-circle fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Modal do Perfil -->
+    <div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="perfilModalLabel">Meu Perfil</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Nome:</strong> <?php echo htmlspecialchars($usuario['Nome']); ?></p>
+                    <p><strong>Email:</strong> <?php echo htmlspecialchars($usuario['Email']); ?></p>
+                    <p><strong>Tipo de Usuário:</strong> <?php echo $usuarioTipo === 'cliente' ? 'Cliente' : 'Hotel'; ?></p>
+                </div>
+                <div class="modal-footer">
+                    <a href="logout.php" class="btn btn-danger">Sair</a>
+                </div>
+            </div>
         </div>
     </div>
-</nav>
+
+    <!-- Conteúdo principal -->
+    <div class="container mt-5 pt-5">
 
 
-<!-- Modal do Perfil -->
-<div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="perfilModalLabel">Meu Perfil</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        <h5>Minhas Reservas</h5>
+        <?php if (count($minhasReservas) > 0): ?>
+            <div class="row">
+                <?php foreach ($minhasReservas as $reserva): ?>
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <img src="path/to/quarto-image.jpg" class="card-img-top" alt="Imagem do Quarto">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo htmlspecialchars($reserva['QuartoNumero']); ?> - <?php echo htmlspecialchars($reserva['QuartoTipo']); ?></h5>
+                                <p class="card-text">Preço: R$ <?php echo number_format($reserva['Preco'], 2, ',', '.'); ?></p>
+                                <p class="card-text"><strong>Check-in:</strong> <?php echo date('d/m/Y', strtotime($reserva['data_checkin'])); ?></p>
+                                <p class="card-text"><strong>Check-out:</strong> <?php echo date('d/m/Y', strtotime($reserva['data_checkout'])); ?></p>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
-            <div class="modal-body">
-                <p><strong>Nome:</strong> <?php echo htmlspecialchars($usuario['Nome']); ?></p>
-                <p><strong>Email:</strong> <?php echo htmlspecialchars($usuario['Email']); ?></p>
-                <p><strong>Tipo de Usuário:</strong> <?php echo $usuarioTipo === 'cliente' ? 'Cliente' : 'Hotel'; ?></p>
-            </div>
-            <div class="modal-footer">
-                <a href="logout.php" class="btn btn-danger">Sair</a>
-            </div>
-        </div>
+        <?php else: ?>
+            <p>Você ainda não fez nenhuma reserva.</p>
+        <?php endif; ?>
     </div>
-</div>
-
-<!-- Conteúdo principal -->
-<div class="container mt-5 pt-5">
+    <!-- Conteúdo principal -->
+    <div class="container mt-5 pt-5">
 
 
-    <h5>Minhas Reservas</h5>
-    <?php if (count($minhasReservas) > 0): ?>
+        <h5>Minhas Reservas</h5>
         <div class="row">
-            <?php foreach ($minhasReservas as $reserva): ?>
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="path/to/quarto-image.jpg" class="card-img-top" alt="Imagem do Quarto">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo htmlspecialchars($reserva['QuartoNumero']); ?> - <?php echo htmlspecialchars($reserva['QuartoTipo']); ?></h5>
-                            <p class="card-text">Preço: R$ <?php echo number_format($reserva['Preco'], 2, ',', '.'); ?></p>
-                            <p class="card-text"><strong>Check-in:</strong> <?php echo date('d/m/Y', strtotime($reserva['data_checkin'])); ?></p>
-                            <p class="card-text"><strong>Check-out:</strong> <?php echo date('d/m/Y', strtotime($reserva['data_checkout'])); ?></p>
+            <div class="col-md-5">
+                <div class="card mb-4">
+                    <img src="uploads/1740695620_teste.jpeg" class="card-img-top" alt="Imagem do Quarto">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="card-title"><strong>Quarto Nº 101</strong></h5>
+                            <span class="badge bg-success">Confirmada</span>
                         </div>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                            <p class="card-text"><strong>Valor da Reserva:</strong> <span class="text-success">R$ 200</span></p>
+                            <p class="card-text"><strong>Tipo de Quarto:</strong> Suíte Luxo</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p class="card-text"><strong>Check-in:</strong> 01/03/2025 09:32:20</p>
+                            <p class="card-text"><strong>Check-out:</strong> 05/03/2025 11:15:50</p>
+                        </div>
+                        <hr>
+                        <h6 class="card-title text-secondary">Reservado por: <strong>Sr. Teste</strong></h6>
                     </div>
                 </div>
-            <?php endforeach; ?>
-        </div>
-    <?php else: ?>
-        <p>Você ainda não fez nenhuma reserva.</p>
-    <?php endif; ?>
-</div>
-<!-- Conteúdo principal -->
-<div class="container mt-5 pt-5">
+            </div>
 
-
-    <h5>Minhas Reservas</h5>
-        <div class="row">
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="uploads/1740695620_teste.jpeg" class="card-img-top" alt="Imagem do Quarto">
-                        <div class="card-body">
-                            <h5 class="card-title">101</h5>
-                            <hr>
-                            <p class="card-text">Preço: R$ 200</p>
-                            <p class="card-text">01/03/2025</p>
-                            <p class="card-text">05/03/2025</p>
-                            <hr>
-                            <h5 class="card-title">Reservado Sr.teste</h5>
-                        </div>
-                    </div>
-                </div>
-            
         </div>
 
-</div>
-<!-- Footer -->
-<footer class="bg-dark text-white py-4 text-center">
-    <p>&copy; 2025 Hotel Lux. Todos os direitos reservados.</p>
-</footer>
+    </div>
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 text-center">
+        <p>&copy; 2025 Hotel Lux. Todos os direitos reservados.</p>
+    </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>
