@@ -300,27 +300,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <!-- Seção de Serviços -->
   <section id="services" class="bg-light py-5">
     <div class="container">
-      <div class="text-center mb-5">
-        <h2>Serviços</h2>
-        <p>Descubra nossas ofertas exclusivas</p>
-      </div>
-      <div class="row">
-        <div class="col-md-4 text-center mb-4">
-          <i class="bi bi-wifi fs-1"></i>
-          <h4 class="mt-3">Wi-Fi Grátis</h4>
-          <p>Conexão rápida e segura em todas as áreas do hotel.</p>
-        </div>
-        <div class="col-md-4 text-center mb-4">
-          <i class="bi bi-cup-straw fs-1"></i>
-          <h4 class="mt-3">Restaurante</h4>
-          <p>Culinária refinada e ambiente aconchegante para suas refeições.</p>
-        </div>
-        <div class="col-md-4 text-center mb-4">
-          <i class="bi bi-bell fs-1"></i>
-          <h4 class="mt-3">Serviço de Quarto</h4>
-          <p>Atendimento 24 horas para garantir sua comodidade.</p>
-        </div>
-
         <div class="text-center mb-5">
         <h2>Serviços</h2>
         <p>Descubra nossas ofertas exclusivas</p>
