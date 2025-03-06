@@ -62,9 +62,9 @@ if ($usuarioTipo === 'hotel') {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
             </div>
             <div class="modal-body">
-                <p><strong>Nome:</strong> <?php echo htmlspecialchars($usuario['Nome']); ?></p>
-                <p><strong>Email:</strong> <?php echo htmlspecialchars($usuario['Email']); ?></p>
-                <p><strong>Tipo de Usuário:</strong> <?php echo $usuarioTipo === 'cliente' ? 'Cliente' : 'Hotel'; ?></p>
+                <p><strong>Nome:</strong> Jonas<?php //echo htmlspecialchars($usuario['Nome']); ?></p>
+                <p><strong>Email:</strong> jonas@jonas.com<?php //echo htmlspecialchars($usuario['Email']); ?></p>
+                <p><strong>Tipo de Usuário:</strong> Hotel<?php //echo $usuarioTipo === 'cliente' ? 'Cliente' : 'Hotel'; ?></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#trocarSenhaModal">Trocar Senha</button>

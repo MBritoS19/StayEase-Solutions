@@ -63,10 +63,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Adicionar Quarto - Hotel Lux</title>
+    <title>Adicionar Quarto - Pousada Mazin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body,
         html {
@@ -142,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Navbar -->
     <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#"> Hotel Lux</a>
+        <a class="navbar-brand" href="#"> Pousada Mazin</a>
         <button class="btn btn-outline-light me-2" onclick="w3_openSidebar()">☰</button>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
             <span class="navbar-toggler-icon"></span>
@@ -200,7 +200,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- Conteúdo Principal -->
     <div class="container mt-5">
-        <h3 class="mb-4">Adicionar Novo Quarto</h3>
+
+        <?php if(isset($id) && $id != "") { ?>
+            <h3 class="mb-4" style="margin-top: 30px;">Editar Quarto</h3>
+        <?php } else { ?>
+            <h3 class="mb-4 mt-10" style="margin-top: 30px;">Adicionar Novo Quarto</h3>
+        <?php }?>
 
         <?php if (isset($sucesso)): ?>
             <div class="alert alert-success"><?php echo $sucesso; ?></div>
@@ -236,16 +241,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div class="mb-3" id="campoValor" style="display: none; gap: 10px; align-items: center;">
-            <div class="mb-3" style="display: none; display: flex; gap: 10px; align-items: center;">
-    <div>
-        <label class="form-label">Adultos</label>
-        <input type="number" name="valor_taxa" class="form-control" placeholder="Informe o valor" step="0.01">
-    </div>
-    <div>
-        <label class="form-label">Crianças</label>
-        <input type="number" name="valor_taxa" class="form-control" placeholder="Informe o valor" step="0.01">
-    </div>
-</div>
+                <div class="mb-3" style="display: none; display: flex; gap: 10px; align-items: center;">
+                    <div>
+                        <label class="form-label">Adultos</label>
+                        <input type="number" name="valor_taxa" class="form-control" placeholder="Número de Adultos" step="1">
+                    </div>
+                    <div>
+                        <label class="form-label">Crianças</label>
+                        <input type="number" name="valor_taxa" class="form-control" placeholder="Número de Crianças" step="1">
+                    </div>
+                </div>
             </div>
 
             <div class="mb-3">
@@ -261,7 +266,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Footer -->
     <footer class="bg-dark text-white py-4">
         <div class="container text-center">
-            <p class="mb-0">&copy; 2025 Hotel Lux. Todos os direitos reservados.</p>
+            <p class="mb-0">&copy; 2025 Pousada Mazin. Todos os direitos reservados.</p>
         </div>
     </footer>
 

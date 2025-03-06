@@ -7,7 +7,7 @@ $dbname = "hotel";
 
 $conexao = new mysqli($servername, $username, $password, $dbname);
 if ($conexao->connect_error) {
-    die("Erro na conexão: " . $conexao->connect_error);
+  die("Erro na conexão: " . $conexao->connect_error);
 }
 
 // Consulta para buscar os quartos disponíveis
@@ -16,28 +16,31 @@ $result = $conexao->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Quartos Disponíveis - Hotel Lux</title>
+  <title>Quartos Disponíveis - Pousada Mazin</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-     
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
     body {
       background: #f8f9fa;
     }
+
     .navbar-custom {
       background-color: #343a40;
     }
+
     .hero {
       background: url('https://source.unsplash.com/1600x900/?hotel,room') no-repeat center center;
       background-size: cover;
-      height: 400px;
+      height: 298px;
       position: relative;
       color: #fff;
     }
+
     .hero-overlay {
       position: absolute;
       top: 0;
@@ -46,6 +49,7 @@ $result = $conexao->query($sql);
       height: 100%;
       background-color: rgba(0, 0, 0, 0.5);
     }
+
     .hero-content {
       position: relative;
       z-index: 2;
@@ -54,15 +58,18 @@ $result = $conexao->query($sql);
       justify-content: center;
       height: 100%;
     }
+
     .card-img-top {
       height: 200px;
       object-fit: cover;
     }
+
     .modal-body img {
       width: 100%;
       height: auto;
       margin-bottom: 15px;
     }
+
     footer {
       background-color: #343a40;
       color: #fff;
@@ -71,46 +78,45 @@ $result = $conexao->query($sql);
     }
   </style>
 </head>
+
 <body>
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-    <div class="container">
-      <a class="navbar-brand" href="index.php">Hotel Lux</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-         <ul class="navbar-nav ms-auto">
-         <li class="nav-item"><a class="nav-link active" href="teste.php">Ver Reserva</a></li>
-           <li class="nav-item"><a class="nav-link active" href="quartos.php">Quartos Disponíveis</a></li>
-           <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="perfilDropdown" role="button" data-bs-toggle="modal" data-bs-target="#perfilModal">
-                            <i class="fas fa-user-circle fa-lg"></i>
-                        </a>
-                    </li>
-         </ul>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Pousada Mazin</a>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a href="quartos.php" class="nav-link">Fazer Reserva</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="perfilDropdown" role="button" data-bs-toggle="modal" data-bs-target="#perfilModal">
+              <i class="fas fa-user-circle fa-lg"></i>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>
 
   <div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="perfilModalLabel">Meu Perfil</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Nome:</strong>Teste</p>
-                    <p><strong>Email:</strong> cliente@cliente </p>
-                    <p><strong>Tipo de Usuário:</strong> cliente</p>
-                </div>
-                <div class="modal-footer">
-                    <a href="logout.php" class="btn btn-danger">Sair</a>
-                </div>
-            </div>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="perfilModalLabel">Meu Perfil</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
         </div>
+        <div class="modal-body">
+          <p><strong>Nome:</strong>Teste</p>
+          <p><strong>Email:</strong> cliente@cliente </p>
+          <p><strong>Tipo de Usuário:</strong> cliente</p>
+        </div>
+        <div class="modal-footer">
+          <a href="logout.php" class="btn btn-danger">Sair</a>
+        </div>
+      </div>
     </div>
+  </div>
 
   <!-- Seção Hero -->
   <header class="hero">
@@ -119,34 +125,143 @@ $result = $conexao->query($sql);
       <h1 class="display-4">Quartos Disponíveis</h1>
     </div>
   </header>
-  
+
   <div class="container my-5">
+
     <div class="row">
-      <?php if ($result->num_rows > 0): ?>
-        <?php while ($quarto = $result->fetch_assoc()): ?>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <img src="uploads/1740695620_teste.jpeg" class="card-img-top" alt="Imagem do Quarto">
+          <div class="card-body">
+            <div class="d-flex justify-content-between text-center">
+              <h5 class="card-title"><strong>Quartos Duplo</strong></h5>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between">
+              <p class="card-text"><strong>Valor da Reserva:</strong><span> R$ 150</span></p>
+            </div>
+            <div class="d-flex justify-content-between">
+              <p class="card-text"><strong>Capacidade:</strong> 2 Adulto</p>
+            </div>
+            <div class="d-flex justify-content-between">
+              <p class="card-text"><strong>Pensão:</strong> Meia</p>
+            </div>
+            <hr>
+            <h6 class="card-title text-secondary d-flex justify-content-center align-items-center">
+            <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#reservaModal" 
+                        data-quarto-id="<?php echo $quarto['id']; 
+                                        ?>"
+                        data-quarto-tipo="<?php echo htmlspecialchars($quarto['tipo']); 
+                                          ?>"
+                        data-quarto-img="<?php echo !empty($quarto['imagem']) ? $quarto['imagem'] : 'img/quarto_padrao.jpg'; 
+                                          ?>">Reserva</button>
+            </h6>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <img src="uploads/1740695620_teste.jpeg" class="card-img-top" alt="Imagem do Quarto">
+          <div class="card-body">
+            <div class="d-flex justify-content-between text-center">
+              <h5 class="card-title"><strong>Quartos Luxo</strong></h5>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between">
+              <p class="card-text"><strong>Valor da Reserva:</strong><span> R$ 200</span></p>
+            </div>
+            <div class="d-flex justify-content-between">
+              <p class="card-text"><strong>Capacidade:</strong> 2 Adulto 2 Crianças</p>
+            </div>
+            <div class="d-flex justify-content-between">
+              <p class="card-text"><strong>Pensão:</strong> Completa</p>
+            </div>
+            <hr>
+            <h6 class="card-title text-secondary d-flex justify-content-center align-items-center">
+            <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#reservaModal" 
+                        data-quarto-id="<?php echo $quarto['id']; 
+                                        ?>"
+                        data-quarto-tipo="<?php echo htmlspecialchars($quarto['tipo']); 
+                                          ?>"
+                        data-quarto-img="<?php echo !empty($quarto['imagem']) ? $quarto['imagem'] : 'img/quarto_padrao.jpg'; 
+                                          ?>">Reserva</button>
+            </h6>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <img src="uploads/1740695620_teste.jpeg" class="card-img-top" alt="Imagem do Quarto">
+          <div class="card-body">
+            <div class="d-flex justify-content-between text-center">
+              <h5 class="card-title"><strong>Quartos Simples</strong></h5>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between">
+              <p class="card-text"><strong>Valor da Reserva:</strong><span> R$ 100</span></p>
+            </div>
+            <div class="d-flex justify-content-between">
+              <p class="card-text"><strong>Capacidade:</strong> 1 Adulto</p>
+            </div>
+            <div class="d-flex justify-content-between">
+              <p class="card-text"><strong>Pensão:</strong> Café da Manhã</p>
+            </div>
+            <hr>
+            <h6 class="card-title text-secondary d-flex justify-content-center align-items-center">
+            <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#reservaModal" 
+                        data-quarto-id="<?php echo $quarto['id']; 
+                                        ?>"
+                        data-quarto-tipo="<?php echo htmlspecialchars($quarto['tipo']); 
+                                          ?>"
+                        data-quarto-img="<?php echo !empty($quarto['imagem']) ? $quarto['imagem'] : 'img/quarto_padrao.jpg'; 
+                                          ?>">Reserva</button>
+            </h6>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- <div class="row">
+      <?php //if ($result->num_rows > 0): 
+      ?>
+        <?php //while ($quarto = $result->fetch_assoc()): 
+        ?>
           <div class="col-md-4 mb-4">
             <div class="card h-100 shadow-sm">
-              <img src="<?php echo !empty($quarto['imagem']) ? $quarto['imagem'] : 'img/quarto_padrao.jpg'; ?>" class="card-img-top" alt="Imagem do Quarto">
+              <img src="./uploads/1740695620_teste.jpeg <?php //echo !empty($quarto['imagem']) ? $quarto['imagem'] : 'img/quarto_padrao.jpg'; 
+                                                        ?>" class="card-img-top" alt="Imagem do Quarto">
               <div class="card-body">
-                <h5 class="card-title"><?php echo htmlspecialchars($quarto['tipo']); ?></h5>
-                <p class="card-text"><strong>Número:</strong> <?php echo htmlspecialchars($quarto['numero']); ?></p>
-                <p class="card-text"><strong>Preço:</strong> R$ <?php echo number_format($quarto['preco'], 2, ',', '.'); ?></p>
+                <h5 class="card-title"><?php //echo htmlspecialchars($quarto['tipo']); 
+                                        ?></h5>
+                <p class="card-text"><strong>Número:</strong> <?php //echo htmlspecialchars($quarto['numero']); 
+                                                              ?></p>
+                <p class="card-text"><strong>Preço:</strong> R$ <?php //echo number_format($quarto['preco'], 2, ',', '.'); 
+                                                                ?></p>
                 <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#reservaModal" 
-                        data-quarto-id="<?php echo $quarto['id']; ?>"
-                        data-quarto-tipo="<?php echo htmlspecialchars($quarto['tipo']); ?>"
-                        data-quarto-img="<?php echo !empty($quarto['imagem']) ? $quarto['imagem'] : 'img/quarto_padrao.jpg'; ?>">
+                        data-quarto-id="<?php //echo $quarto['id']; 
+                                        ?>"
+                        data-quarto-tipo="<?php //echo htmlspecialchars($quarto['tipo']); 
+                                          ?>"
+                        data-quarto-img="<?php //echo !empty($quarto['imagem']) ? $quarto['imagem'] : 'img/quarto_padrao.jpg'; 
+                                          ?>">
                   Reservar
                 </button>
               </div>
             </div>
           </div>
-        <?php endwhile; ?>
-      <?php else: ?>
+        <?php //endwhile; 
+        ?>
+      <?php //else: 
+      ?>
         <div class="col-12 text-center">
           <p>Nenhum quarto disponível no momento.</p>
         </div>
-      <?php endif; ?>
-    </div>
+      <?php //endif; 
+      ?>
+    </div> -->
   </div>
 
   <div class="modal fade" id="reservaModal" tabindex="-1" aria-hidden="true">
@@ -157,7 +272,12 @@ $result = $conexao->query($sql);
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <img id="modal-img" src="" class="modal-img mb-3" alt="Imagem do Quarto">
+          <div class="d-flex justify-content-center">
+            <img src="./uploads/1740695620_teste.jpeg"
+                 class="card-img-top w-50"
+                 alt="Quarto Executivo com cama king-size e vista panorâmica"
+                 loading="lazy">
+          </div>
           <form action="quartos.php" method="POST">
             <input type="hidden" name="quarto_id" id="quarto_id">
             <div class="mb-3">
@@ -181,17 +301,18 @@ $result = $conexao->query($sql);
         </div>
       </div>
     </div>
-  </div>
+</div>
 
-   <!-- Footer -->
-   <footer class="bg-dark text-white py-4 text-center">
-        <p>&copy; 2025 Hotel Lux. Todos os direitos reservados.</p>
-    </footer>
-  
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4 text-center">
+    <p>&copy; 2025 Pousada Mazin. Todos os direitos reservados.</p>
+  </footer>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     var reservaModal = document.getElementById('reservaModal');
-    reservaModal.addEventListener('show.bs.modal', function (event) {
+    reservaModal.addEventListener('show.bs.modal', function(event) {
       var button = event.relatedTarget;
       var quartoId = button.getAttribute('data-quarto-id');
       var quartoImg = button.getAttribute('data-quarto-img');
@@ -200,4 +321,5 @@ $result = $conexao->query($sql);
     });
   </script>
 </body>
+
 </html>

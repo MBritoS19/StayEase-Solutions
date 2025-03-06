@@ -20,7 +20,7 @@ if ($usuarioTipo !== 'hotel') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cadastrar Reserva - Hotel Lux</title>
+    <title>Cadastrar Reserva - Pousada Mazin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         #mySidebar {
@@ -107,11 +107,11 @@ if ($usuarioTipo !== 'hotel') {
                         <input type="date" class="form-control" id="data_checkin" name="data_checkin" required>
                     </div>
                     <div class="col-md-4">
-                        <label for="hora_checkin" class="form-label">Hora de Inicio do Check-in</label>
+                        <label for="hora_checkin" class="form-label">Hora de Inicio Check-in</label>
                         <input type="time" class="form-control" id="hora_checkin" name="hora_checkin" required>
                     </div>
                     <div class="col-md-4">
-                        <label for="hora_saida_checkin" class="form-label">Hora Limite do do Check-in</label>
+                        <label for="hora_saida_checkin" class="form-label">Hora Limite Check-in</label>
                         <input type="time" class="form-control" id="hora_saida_checkin" name="hora_saida_checkin" required>
                     </div>
                     <div class="col-md-4">
@@ -123,7 +123,7 @@ if ($usuarioTipo !== 'hotel') {
                         <input type="time" class="form-control" id="hora_checkout" name="hora_checkout" required>
                     </div>
                     <div class="col-md-4">
-                        <label for="hora_saida_checkout" class="form-label">Hora Limite do Check-out</label>
+                        <label for="hora_saida_checkout" class="form-label">Hora Limite Check-out</label>
                         <input type="time" class="form-control" id="hora_saida_checkout" name="hora_saida_checkout" required>
                     </div>
                 </div>

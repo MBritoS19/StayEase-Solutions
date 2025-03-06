@@ -55,15 +55,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Funcionários - Hotel Lux</title>
+    <title>Funcionários - Pousada Mazin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">>
     <style>
-         body, html {
+        body,
+        html {
             height: 100%;
             margin: 0;
             display: flex;
@@ -130,11 +132,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
         }
     </style>
 </head>
+
 <body>
     <!-- Navbar -->
-<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#"> Hotel Lux</a>
+        <a class="navbar-brand" href="#"> Pousada Mazin</a>
         <button class="btn btn-outline-light me-2" onclick="w3_openSidebar()">☰</button>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
             <span class="navbar-toggler-icon"></span>
@@ -152,19 +155,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
 </nav>
 <div id="mySidebar">
     <button class="btn btn-danger w-100" onclick="w3_closeSidebar()">Fechar</button>
-    <?php //if ($usuarioTipo === 'cliente'): ?>
+    <?php //if ($usuarioTipo === 'cliente'): 
+    ?>
         <a href="quartos.php">Fazer Reserva</a>
-    <?php //else: ?>
+    <?php //else: 
+    ?>
         <a href="perfil.php">Gerenciar</a>
         <a href="adicionar_quarto.php">Adicionar Quartos</a>
         <a href="servico_quarto.php">Serviço de Quarto</a>
         <a href="baixas_pagamento.php">Baixas de Pagamento</a>
         <a href="funcionarios.php">Cadastrar Funcionário</a>
-    <?php //endif; ?>
+    <?php //endif; 
+    ?>
 </div> -->
 
-<!-- Modal do Perfil -->
-<!-- <div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
+    <!-- Modal do Perfil -->
+    <!-- <div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -172,9 +178,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
             </div>
             <div class="modal-body">
-                <p><strong>Nome:</strong> <?php //echo htmlspecialchars($usuario['Nome']); ?></p>
-                <p><strong>Email:</strong> <?php //echo htmlspecialchars($usuario['Email']); ?></p>
-                <p><strong>Tipo de Usuário:</strong> <?php //echo $usuarioTipo === 'cliente' ? 'Cliente' : 'Hotel'; ?></p>
+                <p><strong>Nome:</strong> <?php //echo htmlspecialchars($usuario['Nome']); 
+                                            ?></p>
+                <p><strong>Email:</strong> <?php //echo htmlspecialchars($usuario['Email']); 
+                                            ?></p>
+                <p><strong>Tipo de Usuário:</strong> <?php //echo $usuarioTipo === 'cliente' ? 'Cliente' : 'Hotel'; 
+                                                        ?></p>
             </div>
             <div class="modal-footer">
                 <a href="logout.php" class="btn btn-danger">Sair</a>
@@ -183,13 +192,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
     </div>
 </div>-->
 
-<?php include("./components/navbar.php"); ?>
+    <?php include("./components/navbar.php"); ?>
 
-<?php include("./components/modal_perfil.php"); ?>
+    <?php include("./components/modal_perfil.php"); ?>
 
     <div class="container mt-5 pt-5">
-        <h1 class="text-center">Funcionários do Hotel Lux</h1>
-        
+        <h1 class="text-center">Funcionários do Pousada Mazin</h1>
+
         <div class="card p-4">
             <h4>Lista de Funcionários</h4>
             <form method="GET" action="funcionarios.php" class="mb-3">
@@ -207,9 +216,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
                         <th>Email</th>
                         <th>Cargo</th>
                         <th>Telefone</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>João Silva</td>
+                        <td>joao.silva@email.com</td>
+                        <td>Gerente</td>
+                        <td>(11) 98765-4321</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary ms-2" onclick="abrirModalEdicao('1', 'João Silva', 'joao.silva@email.com', 'Gerente', '(11) 98765-4321')">Editar</button>
+                        </td>
+                    </tr>
                     <?php foreach ($funcionarios as $funcionario): ?>
                         <tr>
                             <td><?php echo $funcionario['id']; ?></td>
@@ -236,7 +256,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
                         <input type="hidden" name="acao" value="cadastrar">
                         <div class="mb-3">
                             <label for="nome" class="form-label">Nome</label>
-                            <input type="text" class="form-control" id="nome" name="nome" required>
+                            <input type="text" class="form-control" id="name" name="nome" required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
@@ -264,39 +284,87 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['ac
         </div>
     </div>
 
+    <div class="modal fade" id="modalEditarFuncionario" tabindex="-1" aria-labelledby="modalCadastrarFuncionarioLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCadastrarFuncionarioLabel">Editar Funcionário</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="funcionarios.php">
+                        <input type="hidden" name="acao" value="cadastrar">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="name" name="nome" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cargo" class="form-label">Cargo</label>
+                            <input type="text" class="form-control" id="cargo" name="cargo" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefone" class="form-label">Telefone</label>
+                            <input type="text" class="form-control" id="telefone" name="telefone" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
-    function w3_openSidebar() {
-        document.getElementById("mySidebar").style.left = "0";
-    }
-
-    function w3_closeSidebar() {
-        document.getElementById("mySidebar").style.left = "-250px";
-    }
-
-    document.getElementById('selectAll')?.addEventListener('change', function() {
-        let checkboxes = document.querySelectorAll('.selectItem');
-        checkboxes.forEach(checkbox => checkbox.checked = this.checked);
-    });
-
-    function aplicarStatusGlobal() {
-        let status = document.getElementById('statusGlobal').value;
-        if (!status) {
-            alert("Selecione um status válido.");
-            return;
+    <script>
+        function w3_openSidebar() {
+            document.getElementById("mySidebar").style.left = "0";
         }
 
-        let checkboxes = document.querySelectorAll('.selectItem:checked');
-        if (checkboxes.length === 0) {
-            alert("Selecione pelo menos um quarto.");
-            return;
+        function w3_closeSidebar() {
+            document.getElementById("mySidebar").style.left = "-250px";
         }
 
-        let ids = Array.from(checkboxes).map(checkbox => checkbox.value);
-        window.location.href = `baixas_quarto.php?id=${ids.join(',')}&acao=${status}`;
-    }
-</script>
+        document.getElementById('selectAll')?.addEventListener('change', function() {
+            let checkboxes = document.querySelectorAll('.selectItem');
+            checkboxes.forEach(checkbox => checkbox.checked = this.checked);
+        });
+
+        function aplicarStatusGlobal() {
+            let status = document.getElementById('statusGlobal').value;
+            if (!status) {
+                alert("Selecione um status válido.");
+                return;
+            }
+
+            let checkboxes = document.querySelectorAll('.selectItem:checked');
+            if (checkboxes.length === 0) {
+                alert("Selecione pelo menos um quarto.");
+                return;
+            }
+
+            let ids = Array.from(checkboxes).map(checkbox => checkbox.value);
+            window.location.href = `baixas_quarto.php?id=${ids.join(',')}&acao=${status}`;
+        }
+
+        function abrirModalEdicao(id, nome, email, cargo, telefone) {
+            document.getElementById('name').value = nome;
+            document.getElementById('email').value = email;
+            document.getElementById('cargo').value = cargo;
+            document.getElementById('telefone').value = telefone;
+
+            // Abrir o modal
+            let reservaModal = new bootstrap.Modal(document.getElementById('modalEditarFuncionario'));
+            reservaModal.show();
+        }
+    </script>
 </body>
+
 </html>
