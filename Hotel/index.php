@@ -311,7 +311,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <!-- Seção de Serviços -->
   <section id="services" class="bg-light py-5">
     <div class="container">
-      <div class="text-center mb-5">
+        <div class="text-center mb-5">
         <h2>Serviços</h2>
         <p>Descubra nossas ofertas exclusivas</p>
       </div>
