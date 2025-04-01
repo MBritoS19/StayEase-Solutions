@@ -65,7 +65,7 @@ Após finalizar a reserva, o cliente pode realizar o login no sistema, utilizand
 
  **Fotos da tela de gerenciamento para o cliente**
 
-![](./prints_JP/Cliente/ReservaReservas.png)
+![](./prints_JP/Cliente/MinhasReservas.png)
 
  **Módulo de Gerenciamento de Funcionários**
 
@@ -78,11 +78,9 @@ Ao acessar o sistema, é exibida a página de gerenciamento de funcionários da 
 
  **Imagens da tela de gerenciamento de funcionários:**
 
-![][image8]
-
-![][image9]
-
-![][image10]
+![](./prints_JP/Funcionarios/GerenciadorFuncionarios.png)
+![](./prints_JP/Funcionarios/CadastroFuncionario.png)
+![](./prints_JP/Funcionarios/EditarFuncionario.png)
 
 **Módulo de gerenciamento de quartos:**  
 **Tela Principal – Gerenciar Quartos**
@@ -108,11 +106,9 @@ Ao acessar o sistema, é exibida a página de gerenciamento de funcionários da 
 
 **Fotos da tela de Gerenciamento de quartos:**
 
-![][image11]
-
-![][image12]
-
-![][image13]
+![](./prints_JP/Quartos/GerenciadorQuartos.png)
+![](./prints_JP/Quartos/CadastroQuarto.png)
+![](./prints_JP/Quartos/EditarQuarto.png)
 
 **Módulo de Gerenciamento de Reservas**
 
@@ -152,10 +148,10 @@ Ao acessar o sistema, é exibida a página de gerenciamento de funcionários da 
 * Exibe, abaixo, uma lista de pedidos ativos.
 
 **Imagens da tela de gerenciamento de reservas:**  
-![][image14]  
-![][image15]  
-![][image16]  
-![][image17]
+![](./prints_JP/Reservas/GerenciadorReservas.png)
+![](./prints_JP/Reservas/CadastroReservas.png)
+![](./prints_JP/Reservas/EditarReservas.png)
+![](./prints_JP/Reservas/servicoQuarto.png)
 
 **Módulo de Gerenciamento de Baixa de Pagamento**
 
@@ -178,9 +174,8 @@ Ao acessar o sistema, é exibida a página de gerenciamento de funcionários da 
 
 **Imagens da tela de gerenciamento de baixas:**
 
-![][image18]
-
-![][image19]
+![](./prints_JP/BaixaPagamentos/BaixasPagamentos.png)
+![](./prints_JP/BaixaPagamentos/ConfirmarBaixaPagamentos.png)
 
 **Navbar Padrão de Gerenciamento (após o login)**
 
@@ -206,11 +201,9 @@ Há também um botão no topo do menu lateral para fechá-lo.
 
  **Imagens da navbar:**
 
-![][image20]
-
-![][image21]
-
-![][image22]
+![](./prints_JP/SideBar.png)
+![](./prints_JP/PerfilUsuario.png)
+![](./prints_JP/AlterarSenhaUsuario.png)
 
 * **Detalhes Importantes**:\*
 
