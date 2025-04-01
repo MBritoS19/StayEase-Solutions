@@ -45,8 +45,8 @@ Ao clicar no botão "Reservar" de um quarto específico, o cliente é levado par
 
  **Fotos de Reserva da Tela Inicial:**
 
-![][image5]  
-![][image6]
+![](./prints_JP/Cliente/ModalReservaQuartosCliente.png) 
+![](./prints_JP/Cliente/ReservaQuartosCliente.png)
 
 **Módulo de Gerenciamento para o Cliente**
 
