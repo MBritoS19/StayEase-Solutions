@@ -45,6 +45,8 @@
 * Tela com uma navbar simples, opção para criar reserva e acessar o perfil.  
 * Exibe uma lista das reservas com informações básicas como número do quarto, status, foto, valor e datas, além de um botão para confirmar a reserva.
 
+---
+
  **Módulo de Gerenciamento de Funcionários**
 
 * Página que exibe a lista de funcionários da Pousada Mazin.  
