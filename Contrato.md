@@ -65,7 +65,7 @@ Após finalizar a reserva, o cliente pode realizar o login no sistema, utilizand
 
  **Fotos da tela de gerenciamento para o cliente**
 
-![][image7]
+![](./prints_JP/Cliente/ReservaReservas.png)
 
  **Módulo de Gerenciamento de Funcionários**
 
