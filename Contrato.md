@@ -31,10 +31,11 @@ Tela inicial composta pelos seguintes módulos: Navbar, Início, Quartos, Servi�
 O botão de Login na Navbar abre uma tela para inserir usuário e senha, com opção para registro, que leva a um formulário para cadastro com nome, e-mail, senha e telefone.
 
  **Imagens tela inicial:**  
-![teste](./prints_JP/index/index1.png)
-![][image2]  
-![][image3]  
-![][image4]
+![](./prints_JP/index/index1.png)
+![](./prints_JP/index/index2.png)
+![](./prints_JP/index/index3.png)
+![](./prints_JP/index/index4.png)
+![](./prints_JP/index/index5.png)
 
  **Módulo de Reserva da Tela Inicial:**
 
