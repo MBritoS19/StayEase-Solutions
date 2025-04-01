@@ -1,5 +1,5 @@
 **Membros da equipe**
-
+---
 **Estefani Vitória Souza Jacinto – Analista de Sistemas**  
  **Resumo:** Profissional com sólida experiência em análise de requisitos, modelagem de processos e suporte à implementação de sistemas. Domina ferramentas de análise de dados e gestão de projetos, com conhecimento avançado em SQL, metodologias ágeis e documentação técnica.  
  **Responsabilidades:** Criação e aprimoramento da documentação técnica do projeto, identificação e correção de bugs, e monitoramento final dos processos de implementação.  
