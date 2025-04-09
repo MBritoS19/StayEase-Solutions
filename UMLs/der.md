@@ -145,4 +145,8 @@ Lista dos valores enumerados utilizados no sistema.
 * **StatusReserva**: PENDENTE, CONFIRMADA, CANCELADA, FINALIZADA  
 * **StatusPagamento**: PENDENTE, APROVADO, RECUSADO  
 * **StatusPedidoServico**: PENDENTE, EM\_ANDAMENTO, CONCLUIDO, CANCELADO
+* 
+
+
+![Entidade_Relacionamento](Entidade_Relacionamento.png)
 
