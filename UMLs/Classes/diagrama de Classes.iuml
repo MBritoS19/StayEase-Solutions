@@ -51,19 +51,8 @@ enum StatusPedidoServico {
   CANCELADO
 }
 
-'--- Classes de valor ---
-class Endereco {
-  - cep: String
-  - logradouro: String
-  - numero: String
-  - complemento: String
-  - bairro: String
-  - cidade: String
-  - estado: String
-}
-
 '--- Entidades principais ---
-class Cliente {
+class Hospedes {
   - id: int
   - nomeCompleto: String
   - email: String
@@ -76,10 +65,20 @@ class Cliente {
   - nacionalidade: String
   - tipoDocumento: TipoDocumento
   - documento: String
-  - endereco: Endereco
+  - cep: String
+  - logradouro: String
+  - numero: String
+  - complemento: String
+  - bairro: String
+  - cidade: String
+  - estado: String
   - criadoEm: DateTime
 
-  + editarCadastro(): void
+  + gerenciarCadastro(): void
+  + gerenciarReservas(): void
+  + avaliarHotel(): void
+  + fazerMultiplasReservas(): void
+
 }
 
 class Funcionario {
@@ -93,8 +92,11 @@ class Funcionario {
 
   + gerenciarReserva(reserva: Reserva): void
   + gerenciarQuarto(quarto: Quarto): void
-  + gerenciarCliente(cliente: Cliente): void
-  + gerenciarPagamento(pagamento: Pagamento): void
+  + gerenciarHospedes(Hospedes: Hospedes): void
+  + confirmarPagamento(pagamento: Pagamento): void
+  + gerenciarFuncionarios(funaionario: Funcionario): void
+  + gerenciarPedido(reserva: Reserva): void
+
 }
 
 class Quarto {
@@ -125,7 +127,7 @@ class Reserva {
   - observacoes: String
   - criadoEm: DateTime
 
-  + criar(quarto: Quarto, cliente: Cliente): void
+  + criar(quarto: Quarto, Hospedes: Hospedes): void
   + cancelar(): void
 }
 
@@ -141,8 +143,6 @@ class ServicoQuarto {
   - nomeServico: String
   - descricao: String
   - preco: double
-
-  + editar(): void
 }
 
 class PedidoServico {
@@ -153,8 +153,7 @@ class PedidoServico {
   - status: StatusPedidoServico
   - criadoEm: DateTime
 
-  + atualizarStatus(novoStatus: StatusPedidoServico): void
-  + calcularValorTotal(): double
+  + gerenciarPedido(reserva: Reserva): void
 }
 
 class Pagamento {
@@ -182,8 +181,8 @@ class RegraQuarto {
 }
 
 '--- Relacionamentos ---
-Cliente "1" -- "0..*" Reserva            : faz
-Cliente "1" -- "0..*" Avaliacao          : avalia
+Hospedes "1" -- "0..*" Reserva            : faz
+Hospedes "1" -- "0..*" Avaliacao          : avalia
 
 Funcionario "1" -- "0..*" Reserva         : gerencia
 Funcionario "1" -- "0..*" Quarto          : gerencia
@@ -201,8 +200,8 @@ PedidoServico "1" -- "1" ServicoQuarto    : baseado_em
 Avaliacao "1" -- "1" Quarto               : sobre
 
 '--- Dependências para enums ---
-Cliente ..> Sexo               : sexo  
-Cliente ..> TipoDocumento      : tipoDocumento  
+Hospedes ..> Sexo               : sexo  
+Hospedes ..> TipoDocumento      : tipoDocumento  
 Quarto ..> StatusQuarto        : status  
 Reserva ..> TipoCama           : tipoCama  
 Reserva ..> TipoPensao         : tipoPensao  
